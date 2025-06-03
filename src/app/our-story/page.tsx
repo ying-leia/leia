@@ -24,11 +24,11 @@ export default function OurStory() {
           <Link href="/shop" className="hover:underline">Shop</Link>
           <span className="font-medium">About</span>
           <Link href="/services" className="hover:underline">Services</Link>
-          <a href="/#contact" className="hover:underline">Contact</a>
+          <Link href="/contact" className="hover:underline">Contact</Link>
           <Link href="/cart" className="hover:underline flex items-center gap-1">
             Cart
             {getCartItemsCount() > 0 && (
-              <span className="bg-[#5F493B] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center leading-none">
+              <span className="bg-[#5F493B] text-white text-sm font-medium rounded-full w-5 h-5 flex items-center justify-center leading-none text-center">
                 {getCartItemsCount()}
               </span>
             )}
@@ -170,7 +170,7 @@ export default function OurStory() {
         <div className="max-w-6xl mx-auto text-center">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
-              <h4 className="font-medium mb-3 uppercase text-sm tracking-wide">Connect</h4>
+              <h4 className="font-medium mb-3 uppercase text-sm tracking-wide cursor-pointer" onClick={() => window.location.href = '/contact'}>Stay Connected</h4>
               <div className="space-y-2 text-sm text-[#5f493b]">
                 <div><Link href="#" className="hover:underline">Instagram</Link></div>
                 <div><Link href="#" className="hover:underline">Pinterest</Link></div>

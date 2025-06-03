@@ -24,7 +24,7 @@ export default function Services() {
           <Link href="/shop" className="hover:underline">Shop</Link>
           <Link href="/our-story" className="hover:underline">About</Link>
           <span className="font-medium">Services</span>
-          <a href="/#contact" className="hover:underline">Contact</a>
+          <Link href="/contact" className="hover:underline">Contact</Link>
           <Link href="/cart" className="hover:underline flex items-center gap-1">
             Cart
             {getCartItemsCount() > 0 && (
@@ -205,12 +205,12 @@ export default function Services() {
                 >
                   Browse Collection
                 </Link>
-                <a 
-                  href="/#contact"
+                <Link 
+                  href="/contact"
                   className="inline-block bg-transparent border-2 border-[#5F493B] text-[#5F493B] px-8 py-3 text-sm uppercase tracking-wide hover:bg-[#5F493B] hover:text-white transition-all duration-200"
                 >
                   Book Consultation
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -223,7 +223,7 @@ export default function Services() {
         <div className="max-w-6xl mx-auto text-center">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
-              <h4 className="font-medium mb-3 uppercase text-sm tracking-wide">Connect</h4>
+              <h4 className="font-medium mb-3 uppercase text-sm tracking-wide cursor-pointer" onClick={() => window.location.href = '/contact'}>Stay Connected</h4>
               <div className="space-y-2 text-sm text-[#5f493b]">
                 <div><Link href="#" className="hover:underline">Instagram</Link></div>
                 <div><Link href="#" className="hover:underline">Pinterest</Link></div>

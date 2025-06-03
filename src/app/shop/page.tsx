@@ -61,11 +61,11 @@ export default function Shop() {
           <span className="font-medium">Shop</span>
           <Link href="/our-story" className="hover:underline">About</Link>
           <Link href="/services" className="hover:underline">Services</Link>
-          <a href="/#contact" className="hover:underline">Contact</a>
+          <Link href="/contact" className="hover:underline">Contact</Link>
           <Link href="/cart" className="hover:underline flex items-center gap-1">
             Cart
             {getCartItemsCount() > 0 && (
-              <span className="bg-[#5F493B] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center leading-none">
+              <span className="bg-[#5F493B] text-white text-sm font-medium rounded-full w-5 h-5 flex items-center justify-center leading-none text-center">
                 {getCartItemsCount()}
               </span>
             )}
@@ -167,7 +167,7 @@ export default function Shop() {
             </div>
             
             <div>
-              <h4 className="font-medium mb-3 uppercase text-sm tracking-wide">Stay Connected</h4>
+              <h4 className="font-medium mb-3 uppercase text-sm tracking-wide cursor-pointer" onClick={() => window.location.href = '/contact'}>Stay Connected</h4>
               <div className="space-y-3">
                 <div className="flex gap-4 text-sm">
                   <Link href="#" className="text-[#5f493b] hover:underline">Instagram</Link>

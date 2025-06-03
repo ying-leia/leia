@@ -97,11 +97,11 @@ export default function Home() {
           <Link href="/shop" className="hover:underline">Shop</Link>
           <Link href="/our-story" className="hover:underline">About</Link>
           <Link href="/services" className="hover:underline">Services</Link>
-          <a href="#contact" className="hover:underline">Contact</a>
+          <Link href="/contact" className="hover:underline">Contact</Link>
           <Link href="/cart" className="hover:underline flex items-center gap-1">
             Cart
             {getCartItemsCount() > 0 && (
-              <span className="bg-[#5F493B] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center leading-none">
+              <span className="bg-[#5F493B] text-white text-sm font-medium rounded-full w-5 h-5 flex items-center justify-center leading-none text-center">
                 {getCartItemsCount()}
               </span>
             )}
@@ -219,7 +219,7 @@ export default function Home() {
 
       {/* Chic Socials Section */}
       <section id="contact" className="py-20 px-6 md:px-20 text-center">
-        <h3 className="text-2xl font-light uppercase mb-4">Stay Connected</h3>
+        <h3 className="text-2xl font-light uppercase mb-4 cursor-pointer" onClick={() => window.location.href = '/contact'}>Stay Connected</h3>
         <p className="text-[#5f493b] mb-10">Follow us for floral stories, behind-the-scenes moments, and exclusive previews.</p>
         <div className="flex justify-center gap-8 text-sm uppercase tracking-wide">
           <a href="#" className="hover:underline">Instagram</a>
