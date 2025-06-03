@@ -19,7 +19,7 @@ export default function OurStory() {
 
       {/* Header */}
       <header className="flex justify-between items-center px-6 md:px-10 py-6 text-[#2f1c11] uppercase tracking-wide border-b border-[#dcd4c3]">
-        <Link href="/" className="text-2xl md:text-3xl font-medium">naia</Link>
+        <Link href="/" className="text-2xl md:text-3xl font-medium">leia</Link>
         <nav className="flex gap-4 md:gap-8 text-sm items-center">
           <Link href="/shop" className="hover:underline">Shop</Link>
           <span className="font-medium">About</span>
@@ -40,7 +40,7 @@ export default function OurStory() {
       <section className="py-20 px-6 md:px-10 text-center">
         <h1 className="text-4xl md:text-6xl font-light mb-6">Our Story</h1>
         <p className="text-lg text-[#5f493b] max-w-3xl mx-auto leading-relaxed">
-          Born from a childhood dream of flowers that never fade, naia preserves the quiet joy 
+          Born from a childhood dream of flowers that never fade, leia preserves the quiet joy 
           of bringing something beautiful into your world — with no expiry date.
         </p>
       </section>
@@ -90,7 +90,7 @@ export default function OurStory() {
                 I dreamed of bouquets that looked just as wild, soft, and magical as fresh blooms — but ones I could keep without watching them fade.
               </p>
               <p className="text-[#5f493b] leading-relaxed">
-                As I grew older, that childhood dream stayed with me. And now, at 25, with a deeper understanding of the environmental cost of floristry — the short lifespan of fresh-cut flowers, the carbon footprint of constant imports, the waste that piles up week after week — I felt an even stronger pull to bring naia to life.
+                As I grew older, that childhood dream stayed with me. And now, at 25, with a deeper understanding of the environmental cost of floristry — the short lifespan of fresh-cut flowers, the carbon footprint of constant imports, the waste that piles up week after week — I felt an even stronger pull to bring leia to life.
               </p>
             </div>
             <div className="lg:col-span-3">
@@ -125,7 +125,7 @@ export default function OurStory() {
               <div className="space-y-4">
                 <h3 className="text-xl font-medium uppercase tracking-wide">Intention</h3>
                 <p className="text-[#5f493b] leading-relaxed">
-                  So I began naia from that seed of longing — to create the kind of floral arrangements I always wished existed. Ones that feel dreamlike, intentional, and lasting. I design each piece the way I used to imagine them when I was nine — not just for how they look, but for what they make you feel.
+                  So I began leia from that seed of longing — to create the kind of floral arrangements I always wished existed. Ones that feel dreamlike, intentional, and lasting. I design each piece the way I used to imagine them when I was nine — not just for how they look, but for what they make you feel.
                 </p>
               </div>
               <div className="space-y-4">
@@ -137,7 +137,7 @@ export default function OurStory() {
                   <p className="text-[#5f493b] leading-relaxed italic">
                     With love,<br/>
                     Ying Yeo<br/>
-                    Founder of naia
+                    Founder of leia
                   </p>
                 </div>
               </div>
@@ -195,7 +195,7 @@ export default function OurStory() {
             </div>
           </div>
           <div className="border-t border-[#dcd4c3] pt-6 text-sm text-[#5f493b]">
-            &copy; {new Date().getFullYear()} NAIA. Crafted with intention.
+            &copy; {new Date().getFullYear()} LEIA. Crafted with intention.
           </div>
         </div>
       </footer>

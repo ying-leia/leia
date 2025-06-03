@@ -92,7 +92,7 @@ export default function Home() {
 
       {/* Top Nav */}
       <header className="absolute top-0 left-0 right-0 z-20 flex justify-between items-center px-10 py-6 text-[#2f1c11] uppercase tracking-wide">
-        <h1 className="text-3xl font-medium">naia</h1>
+        <h1 className="text-3xl font-medium">leia</h1>
         <nav className="flex gap-8 text-sm items-center">
           <Link href="/shop" className="hover:underline">Shop</Link>
           <Link href="/our-story" className="hover:underline">About</Link>

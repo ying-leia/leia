@@ -1,4 +1,4 @@
-// Brand Colors - Centralized color system for NAIA
+// Brand Colors - Centralized color system for LEIA
 export const colors = {
   // Primary brand colors
   primary: '#5F493B',           // Primary button color (warm brown)

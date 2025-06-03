@@ -99,7 +99,7 @@ export default function ProductDetail({ params }: ProductDetailProps) {
 
       {/* Header */}
       <header className="flex justify-between items-center px-6 md:px-10 py-6 text-[#2f1c11] uppercase tracking-wide">
-        <Link href="/" className="text-2xl md:text-3xl font-medium">naia</Link>
+        <Link href="/" className="text-2xl md:text-3xl font-medium">leia</Link>
         <nav className="flex gap-4 md:gap-8 text-sm items-center">
           <Link href="/shop" className="hover:underline">Shop</Link>
           <Link href="/our-story" className="hover:underline">About</Link>
@@ -260,9 +260,9 @@ export default function ProductDetail({ params }: ProductDetailProps) {
               </div>
             </div>
 
-            {/* NAIA Experience Card */}
+            {/* LEIA Experience Card */}
             <div className="bg-[#e7e2d5] text-[#2f1c11] p-6 my-8">
-              <h3 className="text-xl font-light mb-3">The NAIA Experience</h3>
+              <h3 className="text-xl font-light mb-3">The LEIA Experience</h3>
               <p className="text-sm leading-relaxed mb-4">
                 Every arrangement tells a story of preservation and beauty. From our sustainable Ecuadorian farms 
                 to your home, each bloom is carefully selected and preserved to maintain its natural elegance for years. 
