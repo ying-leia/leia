@@ -19,7 +19,7 @@ export default function Services() {
 
       {/* Header */}
       <header className="flex justify-between items-center px-6 md:px-10 py-6 text-[#2f1c11] uppercase tracking-wide border-b border-[#dcd4c3]">
-        <Link href="/" className="text-2xl md:text-3xl font-medium">naia</Link>
+        <Link href="/" className="text-2xl md:text-3xl font-medium">leia</Link>
         <nav className="flex gap-4 md:gap-8 text-sm items-center">
           <Link href="/shop" className="hover:underline">Shop</Link>
           <Link href="/our-story" className="hover:underline">About</Link>
@@ -248,7 +248,7 @@ export default function Services() {
             </div>
           </div>
           <div className="border-t border-[#dcd4c3] pt-6 text-sm text-[#5f493b]">
-            &copy; {new Date().getFullYear()} NAIA. Crafted with intention.
+            &copy; {new Date().getFullYear()} LEIA. Crafted with intention.
           </div>
         </div>
       </footer>

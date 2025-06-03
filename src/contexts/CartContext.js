@@ -69,7 +69,7 @@ export const CartProvider = ({ children }) => {
 
   // Load cart from localStorage on mount
   useEffect(() => {
-    const savedCart = localStorage.getItem('naia-cart');
+    const savedCart = localStorage.getItem('leia-cart');
     if (savedCart) {
       try {
         const cartItems = JSON.parse(savedCart);
@@ -82,7 +82,7 @@ export const CartProvider = ({ children }) => {
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem('naia-cart', JSON.stringify(state.items));
+    localStorage.setItem('leia-cart', JSON.stringify(state.items));
   }, [state.items]);
 
   const showToast = (message) => {

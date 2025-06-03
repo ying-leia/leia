@@ -44,7 +44,7 @@ export default function Cart() {
 
         {/* Header */}
         <header className="flex justify-between items-center px-6 md:px-10 py-6 text-[#2f1c11] uppercase tracking-wide border-b border-[#dcd4c3]">
-          <Link href="/" className="text-2xl md:text-3xl font-medium">naia</Link>
+          <Link href="/" className="text-2xl md:text-3xl font-medium">leia</Link>
           <nav className="flex gap-4 md:gap-8 text-sm">
             <Link href="/" className="hover:underline">Home</Link>
             <Link href="/shop" className="hover:underline">Shop</Link>
@@ -80,7 +80,7 @@ export default function Cart() {
 
       {/* Header */}
       <header className="flex justify-between items-center px-6 md:px-10 py-6 text-[#2f1c11] uppercase tracking-wide border-b border-[#dcd4c3]">
-        <Link href="/" className="text-2xl md:text-3xl font-medium">naia</Link>
+        <Link href="/" className="text-2xl md:text-3xl font-medium">leia</Link>
         <nav className="flex gap-4 md:gap-8 text-sm">
           <Link href="/" className="hover:underline">Home</Link>
           <Link href="/shop" className="hover:underline">Shop</Link>
@@ -220,7 +220,7 @@ export default function Cart() {
 
           {/* Trust Indicators */}
           <div className="mt-16 text-center">
-            <h3 className="text-lg font-medium mb-6">Why Shop With NAIA</h3>
+            <h3 className="text-lg font-medium mb-6">Why Shop With LEIA</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div>
                 <h4 className="font-medium mb-2">Free Shipping</h4>

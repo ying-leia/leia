@@ -1,4 +1,4 @@
-# NAIA - Eternal Flower E-commerce
+# LEIA - Eternal Flower E-commerce
 
 A beautiful, modern e-commerce website for eternal flower arrangements built with Next.js, featuring elegant design and comprehensive shopping functionality.
 
@@ -22,7 +22,7 @@ A beautiful, modern e-commerce website for eternal flower arrangements built wit
 - **Image Gallery**: Scrollable thumbnails with main image display
 - **Vase Selection**: Interactive vase picker with price updates
 - **Collapsible Sections**: Product description, details, and care instructions
-- **NAIA Experience Card**: Brand story integration
+- **LEIA Experience Card**: Brand story integration
 - **Related Products**: "You May Also Like" carousel
 - **Auto-scroll Carousel**: "Uncover More Creations" section
 - **Responsive Add to Cart**: Sticky mobile button, sidebar desktop placement
@@ -56,7 +56,7 @@ A beautiful, modern e-commerce website for eternal flower arrangements built wit
 ## 📁 Project Structure
 
 ```
-naia/
+leia/
 ├── src/
 │   ├── app/
 │   │   ├── page.tsx                 # Updated homepage with e-commerce

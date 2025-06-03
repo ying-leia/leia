@@ -56,7 +56,7 @@ export default function Shop() {
 
       {/* Header */}
       <header className="flex justify-between items-center px-6 md:px-10 py-6 text-[#2f1c11] uppercase tracking-wide border-b border-[#dcd4c3]">
-        <Link href="/" className="text-2xl md:text-3xl font-medium">naia</Link>
+        <Link href="/" className="text-2xl md:text-3xl font-medium">leia</Link>
         <nav className="flex gap-4 md:gap-8 text-sm items-center">
           <span className="font-medium">Shop</span>
           <Link href="/our-story" className="hover:underline">About</Link>
@@ -140,7 +140,7 @@ export default function Shop() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <h3 className="text-xl font-medium mb-4">naia</h3>
+              <h3 className="text-xl font-medium mb-4">leia</h3>
               <p className="text-sm text-[#5f493b] leading-relaxed">
                 Eternal flowers crafted with intention for the poetic soul.
               </p>
