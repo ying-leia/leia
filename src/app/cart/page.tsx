@@ -28,8 +28,7 @@ export default function Cart() {
     getCartTotal, 
     getCartSubtotal, 
     getCartVasesTotal,
-    formatPrice,
-    getCartItemsCount
+    formatPrice
   } = useCart();
 
   if (cartItems.length === 0) {
