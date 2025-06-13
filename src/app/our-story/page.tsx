@@ -6,8 +6,6 @@ import { useCart } from "../../contexts/CartContext";
 import Navigation from '../../components/Navigation';
 
 export default function OurStory() {
-  const { getCartItemsCount } = useCart();
-
   return (
     <div className="min-h-screen bg-[#F8F5F2] text-[#2f1c11]">
       <style>{`

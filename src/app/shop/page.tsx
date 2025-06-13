@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { products } from '../../data/products';
 import ProductGrid from '../../components/ProductGrid';
-import { useCart } from '../../contexts/CartContext';
 import Navigation from '../../components/Navigation';
 
 interface Product {
@@ -29,7 +28,6 @@ interface Product {
 
 export default function Shop() {
   const [filter, setFilter] = useState('all');
-  const { getCartItemsCount } = useCart();
 
   const filteredProducts: Product[] = filter === 'all' 
     ? products 

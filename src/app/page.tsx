@@ -8,7 +8,6 @@ import { useCart } from "../contexts/CartContext";
 import Navigation from "../components/Navigation";
 
 export default function Home() {
-  const { getCartItemsCount } = useCart();
   const featuredProducts = getFeaturedProducts();
   const occasions = getOccasions();
   const [isScrolling, setIsScrolling] = useState(false);

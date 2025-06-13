@@ -47,7 +47,7 @@ export default function ProductDetail({ params }: ProductDetailProps) {
   const [suggestedProducts, setSuggestedProducts] = useState<Product[]>([]);
   const [allProducts, setAllProducts] = useState<Product[]>([]);
   
-  const { addItem, formatPrice, getCartItemsCount } = useCart();
+  const { addItem, formatPrice } = useCart();
 
   useEffect(() => {
     const foundProduct = getProductById(id);
