@@ -31,7 +31,6 @@ export const generateImagePaths = (folderPath, images) => {
   }
   
   // Fallback: return single image with folder name
-  const folderName = folderPath.split('/').filter(Boolean).pop();
   return [`${cleanFolderPath}main.jpg`];
 };
 

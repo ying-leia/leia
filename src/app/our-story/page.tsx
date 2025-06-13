@@ -1,8 +1,8 @@
-'use client';
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useCart } from '../../contexts/CartContext';
+"use client";
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useCart } from "../../contexts/CartContext";
 
 export default function OurStory() {
   const { getCartItemsCount } = useCart();
@@ -10,9 +10,9 @@ export default function OurStory() {
   return (
     <div className="min-h-screen bg-[#F8F5F2] text-[#2f1c11]">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap');
+        @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap");
         body {
-          font-family: 'Playfair Display', serif;
+          font-family: "Playfair Display", serif;
         }
       `}</style>
 

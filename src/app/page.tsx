@@ -1,22 +1,18 @@
-'use client';
-import React, { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
-import { getFeaturedProducts, getOccasions } from '../data/products';
-import ProductCard from '../components/ProductCard';
-import { useCart } from '../contexts/CartContext';
+"use client";
+import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { getFeaturedProducts, getOccasions } from "../data/products";
+import ProductCard from "../components/ProductCard";
+import { useCart } from "../contexts/CartContext";
 
 export default function Home() {
-  const { getCartItemsCount, addItem } = useCart();
+  const { getCartItemsCount } = useCart();
   const featuredProducts = getFeaturedProducts();
   const occasions = getOccasions();
   const [isScrolling, setIsScrolling] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  const handleQuickAdd = (product: any) => {
-    const defaultVase = product.availableVases?.[0] || null;
-    addItem(product, defaultVase, 1);
-  };
 
   // Handle manual scrolling detection
   useEffect(() => {
@@ -37,10 +33,10 @@ export default function Home() {
       }, 1000);
     };
 
-    container.addEventListener('scroll', handleScroll, { passive: true });
+    container.addEventListener("scroll", handleScroll, { passive: true });
     
     return () => {
-      container.removeEventListener('scroll', handleScroll);
+      container.removeEventListener("scroll", handleScroll);
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current);
       }
@@ -53,9 +49,9 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#F8F5F2] text-[#2f1c11] font-[serif] font-light">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap');
+        @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap");
         body {
-          font-family: 'Playfair Display', serif;
+          font-family: "Playfair Display", serif;
         }
         
         @keyframes scroll {
@@ -110,10 +106,12 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative h-[100vh] flex items-center justify-center">
-        <img
+        <Image
           src="/assets-old/hero.jpg"
           alt="Floral Arrangement Hero"
-          className="absolute inset-0 w-full h-full object-cover z-0"
+          fill
+          priority
+          className="object-cover z-0"
         />
       </section>
 
@@ -166,10 +164,12 @@ export default function Home() {
                 className="flex-shrink-0 w-80 block group"
               >
                 <div className="relative aspect-[4/5] overflow-hidden mb-4">
-                  <img
+                  <Image
                     src={occasion.image}
                     alt={occasion.name}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 320px"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
                 <div className="text-center px-4">
@@ -193,11 +193,13 @@ export default function Home() {
 
       {/* Footer Visual Section: 2/3 Image + 1/3 Text */}
       <section id="about" className="py-20 px-0 grid grid-cols-1 md:grid-cols-3 items-center">
-        <div className="md:col-span-2 h-full w-full">
-          <img
+        <div className="md:col-span-2 h-full w-full relative">
+          <Image
             src="/assets/products/liora/sunset-side.jpg"
             alt="Eternal Image Feature"
-            className="w-full h-full object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, 66vw"
+            className="object-cover"
           />
         </div>
         <div className="bg-[#F8F5F2] px-8 py-16 text-left">
