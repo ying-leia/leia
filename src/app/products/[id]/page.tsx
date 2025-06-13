@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useCart } from '../../../contexts/CartContext';
 import { getProductById, getSuggestedProducts, products } from '../../../data/products';
 import ProductCard from '../../../components/ProductCard';
-import { colors } from '../../../styles/colors';
 
 // Type definitions
 interface Product {
@@ -104,7 +103,7 @@ export default function ProductDetail({ params }: ProductDetailProps) {
           <Link href="/shop" className="hover:underline">Shop</Link>
           <Link href="/our-story" className="hover:underline">About</Link>
           <Link href="/services" className="hover:underline">Services</Link>
-          <a href="/#contact" className="hover:underline">Contact</a>
+          <Link href="/#contact" className="hover:underline">Contact</Link>
           <Link href="/cart" className="hover:underline flex items-center gap-1">
             Cart
             {getCartItemsCount() > 0 && (

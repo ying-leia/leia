@@ -42,7 +42,7 @@ export default function Contact() {
           {submitted ? (
             <div className="text-center py-12">
               <h2 className="text-2xl mb-4">Thank you!</h2>
-              <p className="text-[#5f493b]">Your message has been received. We'll be in touch soon.</p>
+              <p className="text-[#5f493b]">Your message has been received. We&apos;ll be in touch soon.</p>
             </div>
           ) : (
             <form className="space-y-6" onSubmit={handleSubmit}>
@@ -92,8 +92,8 @@ export default function Contact() {
           )}
         </div>
         <div className="mt-12 text-center text-[#5f493b] text-sm">
-          <div className="mb-2">Email: <a href="mailto:hello@leiaflowers.com" className="underline">hello@leiaflowers.com</a></div>
-          <div>Instagram: <a href="#" className="underline">@leiaflowers</a></div>
+          <div className="mb-2">Email: <Link href="mailto:hello@leiaflowers.com" className="underline">hello@leiaflowers.com</Link></div>
+          <div>Instagram: <Link href="#" className="underline">@leiaflowers</Link></div>
         </div>
       </main>
     </div>

@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { getFeaturedProducts, getOccasions } from '../data/products';
 import ProductCard from '../components/ProductCard';
 import { useCart } from '../contexts/CartContext';
-import { colors } from '../styles/colors';
 
 export default function Home() {
   const { getCartItemsCount, addItem } = useCart();
@@ -222,21 +221,21 @@ export default function Home() {
         <h3 className="text-2xl font-light uppercase mb-4 cursor-pointer" onClick={() => window.location.href = '/contact'}>Stay Connected</h3>
         <p className="text-[#5f493b] mb-10">Follow us for floral stories, behind-the-scenes moments, and exclusive previews.</p>
         <div className="flex justify-center gap-8 text-sm uppercase tracking-wide">
-          <a href="#" className="hover:underline">Instagram</a>
-          <a href="#" className="hover:underline">Pinterest</a>
-          <a href="#" className="hover:underline">TikTok</a>
-          <a href="#" className="hover:underline">Newsletter</a>
+          <Link href="#" className="hover:underline">Instagram</Link>
+          <Link href="#" className="hover:underline">Pinterest</Link>
+          <Link href="#" className="hover:underline">TikTok</Link>
+          <Link href="#" className="hover:underline">Newsletter</Link>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="bg-[#2f1c11] text-white py-10 px-6 md:px-20 text-sm">
         <div className="flex flex-col md:flex-row justify-between gap-6">
-          <p>&copy; {new Date().getFullYear()} Éternelle. Crafted with intention.</p>
+          <p>&copy; {new Date().getFullYear()} LEIA. Crafted with intention.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:underline">Privacy</a>
-            <a href="#" className="hover:underline">Terms</a>
-            <a href="#" className="hover:underline">Instagram</a>
+            <Link href="#" className="hover:underline">Privacy</Link>
+            <Link href="#" className="hover:underline">Terms</Link>
+            <Link href="#" className="hover:underline">Instagram</Link>
           </div>
         </div>
       </footer>

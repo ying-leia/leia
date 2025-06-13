@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '../../contexts/CartContext';
-import { colors } from '../../styles/colors';
 
 interface CustomerInfo {
   email: string;

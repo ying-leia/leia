@@ -1,9 +1,8 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '../../contexts/CartContext';
-import { colors } from '../../styles/colors';
 
 export default function Services() {
   const { getCartItemsCount } = useCart();

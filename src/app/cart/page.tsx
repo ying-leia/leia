@@ -3,7 +3,6 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '../../contexts/CartContext';
-import { colors } from '../../styles/colors';
 
 interface CartItem {
   cartId: string;
@@ -50,7 +49,7 @@ export default function Cart() {
             <Link href="/shop" className="hover:underline">Shop</Link>
             <Link href="/our-story" className="hover:underline">About</Link>
             <Link href="/services" className="hover:underline">Services</Link>
-            <a href="/#contact" className="hover:underline">Contact</a>
+            <Link href="/#contact" className="hover:underline">Contact</Link>
             <Link href="/cart" className="hover:underline flex items-center gap-1">
               Cart
               {getCartItemsCount() > 0 && (
@@ -95,7 +94,7 @@ export default function Cart() {
           <Link href="/shop" className="hover:underline">Shop</Link>
           <Link href="/our-story" className="hover:underline">About</Link>
           <Link href="/services" className="hover:underline">Services</Link>
-          <a href="/#contact" className="hover:underline">Contact</a>
+          <Link href="/#contact" className="hover:underline">Contact</Link>
           <Link href="/cart" className="hover:underline flex items-center gap-1">
             Cart
             {getCartItemsCount() > 0 && (

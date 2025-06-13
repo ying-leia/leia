@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { products } from '../../data/products';
 import ProductGrid from '../../components/ProductGrid';
 import { useCart } from '../../contexts/CartContext';
-import { colors } from '../../styles/colors';
 
 interface Product {
   id: string;
