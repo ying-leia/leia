@@ -17,6 +17,12 @@ export const metadata: Metadata = {
   title: "LEIA - Eternal Flower Arrangements",
   description: "Discover eternal flower arrangements crafted with intention. Preserved blooms from sustainable Ecuadorian farms that last for years.",
   keywords: ["eternal flowers", "preserved flowers", "floral arrangements", "sustainable flowers", "home decor"],
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
 };
 
 export default function RootLayout({

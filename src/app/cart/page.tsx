@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '../../contexts/CartContext';
+import Navigation from '../../components/Navigation';
 
 interface CartItem {
   cartId: string;
@@ -41,27 +42,10 @@ export default function Cart() {
           }
         `}</style>
 
-        {/* Header */}
-        <header className="flex justify-between items-center px-6 md:px-10 py-6 text-[#2f1c11] uppercase tracking-wide border-b border-[#dcd4c3]">
-          <Link href="/" className="text-2xl md:text-3xl font-medium">leia</Link>
-          <nav className="flex gap-4 md:gap-8 text-sm items-center">
-            <Link href="/shop" className="hover:underline">Shop</Link>
-            <Link href="/our-story" className="hover:underline">About</Link>
-            <Link href="/services" className="hover:underline">Services</Link>
-            <Link href="/#contact" className="hover:underline">Contact</Link>
-            <Link href="/cart" className="hover:underline flex items-center gap-1">
-              Cart
-              {getCartItemsCount() > 0 && (
-                <span className="bg-[#5F493B] text-white text-sm font-medium rounded-full w-5 h-5 flex items-center justify-center leading-none text-center">
-                  {getCartItemsCount()}
-                </span>
-              )}
-            </Link>
-          </nav>
-        </header>
+        <Navigation />
 
         {/* Empty Cart */}
-        <div className="flex flex-col items-center justify-center min-h-[60vh] px-6">
+        <div className="flex flex-col items-center justify-center min-h-[60vh] px-6 pt-20 md:pt-12">
           <h1 className="text-3xl md:text-4xl font-light mb-4">Your Cart is Empty</h1>
           <p className="text-[#5f493b] mb-8 text-center max-w-md">
             Discover our beautiful collection of eternal flower arrangements and start creating your perfect space.
@@ -86,26 +70,9 @@ export default function Cart() {
         }
       `}</style>
 
-      {/* Header */}
-      <header className="flex justify-between items-center px-6 md:px-10 py-6 text-[#2f1c11] uppercase tracking-wide border-b border-[#dcd4c3]">
-        <Link href="/" className="text-2xl md:text-3xl font-medium">leia</Link>
-        <nav className="flex gap-4 md:gap-8 text-sm items-center">
-          <Link href="/shop" className="hover:underline">Shop</Link>
-          <Link href="/our-story" className="hover:underline">About</Link>
-          <Link href="/services" className="hover:underline">Services</Link>
-          <Link href="/#contact" className="hover:underline">Contact</Link>
-          <Link href="/cart" className="hover:underline flex items-center gap-1">
-            Cart
-            {getCartItemsCount() > 0 && (
-              <span className="bg-[#5F493B] text-white text-sm font-medium rounded-full w-5 h-5 flex items-center justify-center leading-none text-center">
-                {getCartItemsCount()}
-              </span>
-            )}
-          </Link>
-        </nav>
-      </header>
+      <Navigation />
 
-      <div className="px-6 md:px-10 py-12">
+      <div className="px-6 md:px-10 py-12 pt-20 md:pt-12">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-light mb-8 flex items-center gap-3">
             Shopping Cart

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useCart } from '../../../contexts/CartContext';
 import { getProductById, getSuggestedProducts, products } from '../../../data/products';
 import ProductCard from '../../../components/ProductCard';
+import Navigation from '../../../components/Navigation';
 
 // Type definitions
 interface Product {
@@ -32,7 +33,9 @@ interface Vase {
 }
 
 interface ProductDetailProps {
-  params: Promise<{ id: string }>;
+  params: {
+    id: string;
+  };
 }
 
 export default function ProductDetail({ params }: ProductDetailProps) {
@@ -96,27 +99,10 @@ export default function ProductDetail({ params }: ProductDetailProps) {
         }
       `}</style>
 
-      {/* Header */}
-      <header className="flex justify-between items-center px-6 md:px-10 py-6 text-[#2f1c11] uppercase tracking-wide">
-        <Link href="/" className="text-2xl md:text-3xl font-medium">leia</Link>
-        <nav className="flex gap-4 md:gap-8 text-sm items-center">
-          <Link href="/shop" className="hover:underline">Shop</Link>
-          <Link href="/our-story" className="hover:underline">About</Link>
-          <Link href="/services" className="hover:underline">Services</Link>
-          <Link href="/#contact" className="hover:underline">Contact</Link>
-          <Link href="/cart" className="hover:underline flex items-center gap-1">
-            Cart
-            {getCartItemsCount() > 0 && (
-              <span className="bg-[#5F493B] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center leading-none">
-                {getCartItemsCount()}
-              </span>
-            )}
-          </Link>
-        </nav>
-      </header>
+      <Navigation currentPage="shop" />
 
       {/* Breadcrumb */}
-      <div className="px-6 md:px-10 mb-6">
+      <div className="px-6 md:px-10 mb-6 mt-28 md:mt-32">
         <nav className="text-sm text-[#5f493b]">
           <Link href="/" className="hover:underline">Home</Link>
           <span className="mx-2">/</span>

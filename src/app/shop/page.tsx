@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { products } from '../../data/products';
 import ProductGrid from '../../components/ProductGrid';
 import { useCart } from '../../contexts/CartContext';
+import Navigation from '../../components/Navigation';
 
 interface Product {
   id: string;
@@ -53,24 +54,7 @@ export default function Shop() {
         }
       `}</style>
 
-      {/* Header */}
-      <header className="flex justify-between items-center px-6 md:px-10 py-6 text-[#2f1c11] uppercase tracking-wide border-b border-[#dcd4c3]">
-        <Link href="/" className="text-2xl md:text-3xl font-medium">leia</Link>
-        <nav className="flex gap-4 md:gap-8 text-sm items-center">
-          <span className="font-medium">Shop</span>
-          <Link href="/our-story" className="hover:underline">About</Link>
-          <Link href="/services" className="hover:underline">Services</Link>
-          <Link href="/contact" className="hover:underline">Contact</Link>
-          <Link href="/cart" className="hover:underline flex items-center gap-1">
-            Cart
-            {getCartItemsCount() > 0 && (
-              <span className="bg-[#5F493B] text-white text-sm font-medium rounded-full w-5 h-5 flex items-center justify-center leading-none text-center">
-                {getCartItemsCount()}
-              </span>
-            )}
-          </Link>
-        </nav>
-      </header>
+      <Navigation currentPage="shop" />
 
       {/* Hero Section */}
       <section className="text-center py-16 px-6 md:px-10">

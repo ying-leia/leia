@@ -5,6 +5,7 @@ import Image from "next/image";
 import { getFeaturedProducts, getOccasions } from "../data/products";
 import ProductCard from "../components/ProductCard";
 import { useCart } from "../contexts/CartContext";
+import Navigation from "../components/Navigation";
 
 export default function Home() {
   const { getCartItemsCount } = useCart();
@@ -85,24 +86,7 @@ export default function Home() {
         }
       `}</style>
 
-      {/* Top Nav */}
-      <header className="absolute top-0 left-0 right-0 z-20 flex justify-between items-center px-10 py-6 text-[#2f1c11] uppercase tracking-wide">
-        <h1 className="text-3xl font-medium">leia</h1>
-        <nav className="flex gap-8 text-sm items-center">
-          <Link href="/shop" className="hover:underline">Shop</Link>
-          <Link href="/our-story" className="hover:underline">About</Link>
-          <Link href="/services" className="hover:underline">Services</Link>
-          <Link href="/contact" className="hover:underline">Contact</Link>
-          <Link href="/cart" className="hover:underline flex items-center gap-1">
-            Cart
-            {getCartItemsCount() > 0 && (
-              <span className="bg-[#5F493B] text-white text-sm font-medium rounded-full w-5 h-5 flex items-center justify-center leading-none text-center">
-                {getCartItemsCount()}
-              </span>
-            )}
-          </Link>
-        </nav>
-      </header>
+      <Navigation />
 
       {/* Hero Section */}
       <section className="relative h-[100vh] flex items-center justify-center">
