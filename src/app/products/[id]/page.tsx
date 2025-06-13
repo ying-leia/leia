@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, use } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '../../../contexts/CartContext';
@@ -33,13 +33,13 @@ interface Vase {
 }
 
 interface ProductDetailProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default function ProductDetail({ params }: ProductDetailProps) {
-  const { id } = params;
+  const { id } = use(params);
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [selectedVase, setSelectedVase] = useState<Vase | null>(null);
