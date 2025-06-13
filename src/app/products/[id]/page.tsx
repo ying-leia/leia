@@ -38,7 +38,7 @@ interface ProductDetailProps {
   };
 }
 
-export default async function Page({ params }: ProductDetailProps) {
+export default function ProductDetail({ params }: ProductDetailProps) {
   const { id } = params;
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -342,4 +342,4 @@ export default async function Page({ params }: ProductDetailProps) {
       `}</style>
     </div>
   );
-} // dummy change to trigger redeploy
+}
