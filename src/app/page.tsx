@@ -99,7 +99,7 @@ export default function Home() {
 
       {/* Featured Products Section */}
       <section className="py-24 px-6 md:px-10 text-center">
-        <h2 className="text-3xl tracking-wide uppercase mb-4">Featured Collection</h2>
+        <h2 className="text-4xl md:text-5xl font-light mb-4">Featured Collection</h2>
         <p className="text-[#5f493b] mb-12 max-w-2xl mx-auto leading-relaxed">
           Discover our most beloved eternal flower arrangements, each crafted to bring lasting beauty to your space.
         </p>

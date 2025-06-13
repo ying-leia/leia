@@ -55,7 +55,7 @@ export default function Shop() {
       <Navigation currentPage="shop" />
 
       {/* Hero Section */}
-      <section className="text-center py-16 px-6 md:px-10">
+      <section className="text-center py-24 px-6 md:px-10">
         <h1 className="text-4xl md:text-5xl font-light mb-4">The Collection</h1>
         <p className="text-lg text-[#5f493b] max-w-2xl mx-auto leading-relaxed">
           Discover our carefully curated selection of eternal flower arrangements, 

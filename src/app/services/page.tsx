@@ -17,8 +17,8 @@ export default function Services() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="py-20 px-6 md:px-10 text-center">
-        <h1 className="text-4xl md:text-6xl font-light mb-6">Our Services</h1>
+      <section className="py-24 px-6 md:px-10 text-center">
+        <h1 className="text-4xl md:text-5xl font-light mb-4">Our Services</h1>
         <p className="text-lg text-[#5f493b] max-w-3xl mx-auto leading-relaxed">
           From intimate celebrations to grand corporate spaces, we create bespoke eternal 
           flower arrangements that transform moments into lasting memories.

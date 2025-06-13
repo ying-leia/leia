@@ -17,8 +17,8 @@ export default function OurStory() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="py-20 px-6 md:px-10 text-center">
-        <h1 className="text-4xl md:text-6xl font-light mb-6">Our Story</h1>
+      <section className="py-24 px-6 md:px-10 text-center">
+        <h1 className="text-4xl md:text-5xl font-light mb-4">Our Story</h1>
         <p className="text-lg text-[#5f493b] max-w-3xl mx-auto leading-relaxed">
           Born from a childhood dream of flowers that never fade, leia preserves the quiet joy 
           of bringing something beautiful into your world — with no expiry date.
