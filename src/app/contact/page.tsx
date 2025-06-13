@@ -35,8 +35,10 @@ export default function Contact() {
 
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-16">
         <h1 className="text-4xl md:text-5xl font-light mb-4 text-center">Contact Us</h1>
-        <p className="text-[#5f493b] mb-10 text-center max-w-xl">
-          We'd love to hear from you. Fill out the form below and our team will get back to you soon.
+        <h2 className="text-3xl font-light uppercase tracking-wide mb-4">Get in Touch</h2>
+        <p className="text-[#5f493b] mb-12 max-w-2xl mx-auto leading-relaxed">
+          We&apos;d love to hear from you. Whether you have a question about our arrangements, 
+          need help with an order, or want to discuss a custom project, we&apos;re here to help.
         </p>
         <div className="w-full max-w-xl bg-white rounded-lg shadow p-8">
           {submitted ? (

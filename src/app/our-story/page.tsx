@@ -64,10 +64,10 @@ export default function OurStory() {
             <div className="lg:col-span-2 space-y-6">
               <h2 className="text-3xl font-light uppercase tracking-wide">The Beginning</h2>
               <p className="text-[#5f493b] leading-relaxed">
-                I've loved flowers for as long as I can remember.
+                I&apos;ve loved flowers for as long as I can remember.
               </p>
               <p className="text-[#5f493b] leading-relaxed">
-                When I was just nine years old, I'd save up my pocket money to buy grocery store blooms on my walk home from school — no occasion, no reason, just for the quiet joy of bringing something beautiful into my room. But as much as I adored them, there was always a moment I dreaded: when the petals began to wilt, the water turned murky, and mould took over what was once something soft and radiant.
+                When I was just nine years old, I&apos;d save up my pocket money to buy grocery store blooms on my walk home from school — no occasion, no reason, just for the quiet joy of bringing something beautiful into my room. But as much as I adored them, there was always a moment I dreaded: when the petals began to wilt, the water turned murky, and mould took over what was once something soft and radiant.
               </p>
               <p className="text-[#5f493b] leading-relaxed">
                 Watching them decay felt a little like losing a piece of light I had held onto.
@@ -80,10 +80,10 @@ export default function OurStory() {
             <div className="lg:col-span-4 space-y-6">
               <h2 className="text-3xl font-light uppercase tracking-wide">The Dream</h2>
               <p className="text-[#5f493b] leading-relaxed">
-                That's where the dream of eternal flowers was born.
+                That&apos;s where the dream of eternal flowers was born.
               </p>
               <p className="text-[#5f493b] leading-relaxed">
-                Back then, in Singapore around 2010, preserved flowers were nearly impossible to find — and when I did see them online, they were either far too expensive or locked in boxes of stiff rose heads that didn't feel romantic or real to me. I didn't want something that looked artificial. I wanted something that felt alive.
+                Back then, in Singapore around 2010, preserved flowers were nearly impossible to find — and when I did see them online, they were either far too expensive or locked in boxes of stiff rose heads that didn&apos;t feel romantic or real to me. I didn&apos;t want something that looked artificial. I wanted something that felt alive.
               </p>
               <p className="text-[#5f493b] leading-relaxed">
                 I dreamed of bouquets that looked just as wild, soft, and magical as fresh blooms — but ones I could keep without watching them fade.

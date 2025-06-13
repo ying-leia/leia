@@ -52,7 +52,7 @@ export default function Services() {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-light uppercase tracking-wide mb-4">Personal Celebrations</h2>
             <p className="text-[#5f493b] max-w-2xl mx-auto leading-relaxed">
-              Mark life's most precious moments with arrangements designed to last as long as the memories they represent.
+              Mark life&apos;s most precious moments with arrangements designed to last as long as the memories they represent.
             </p>
           </div>
 
@@ -133,7 +133,7 @@ export default function Services() {
           <div className="text-center mb-16 pt-16 border-t border-[#dcd4c3]">
             <h2 className="text-3xl font-light uppercase tracking-wide mb-4">Corporate & Commercial</h2>
             <p className="text-[#5f493b] max-w-2xl mx-auto leading-relaxed">
-              Elevate professional spaces with sophisticated arrangements that reflect your brand's commitment to quality and elegance.
+              Elevate professional spaces with sophisticated arrangements that reflect your brand&apos;s commitment to quality and elegance.
             </p>
           </div>
 
@@ -192,9 +192,9 @@ export default function Services() {
           {/* Consultation CTA */}
           <div className="text-center py-16 bg-[#e7e2d5] -mx-6 md:-mx-10">
             <div className="px-6 md:px-10">
-              <h2 className="text-3xl font-light mb-6">Let's Create Something Beautiful Together</h2>
+              <h2 className="text-3xl font-light mb-6">Let&apos;s Create Something Beautiful Together</h2>
               <p className="text-[#5f493b] mb-8 max-w-2xl mx-auto leading-relaxed">
-                Whether you're planning an intimate celebration or designing a commercial space, 
+                Whether you&apos;re planning an intimate celebration or designing a commercial space, 
                 our team will work with you to create arrangements that perfectly capture your vision.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

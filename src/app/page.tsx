@@ -147,7 +147,7 @@ export default function Home() {
       <section id="occasions" className="py-24 px-0 text-center">
         <h2 className="text-3xl tracking-wide uppercase mb-8">Perfect for Every Occasion</h2>
         <p className="text-[#5f493b] mb-12 max-w-2xl mx-auto leading-relaxed px-6">
-          From life's grandest celebrations to its quietest moments, our eternal arrangements 
+          From life&apos;s grandest celebrations to its quietest moments, our eternal arrangements 
           mark occasions with lasting beauty and meaning.
         </p>
         
@@ -207,7 +207,7 @@ export default function Home() {
           <p className="text-base leading-relaxed mb-6">
             We design with feeling. Flowers are fleeting by nature — but when preserved with
             intention, they evoke nostalgia, softness, and meaning across time. Each arrangement
-            we craft is a love letter to nature's details, grounded in balance and emotion.
+            we craft is a love letter to nature&apos;s details, grounded in balance and emotion.
           </p>
           <Link 
             href="/our-story"
