@@ -342,4 +342,4 @@ export default function ProductDetail({ params }: ProductDetailProps) {
       `}</style>
     </div>
   );
-} 
+} // dummy change to trigger redeploy
