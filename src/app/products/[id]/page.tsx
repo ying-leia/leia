@@ -38,7 +38,7 @@ interface ProductDetailProps {
   };
 }
 
-export default function ProductDetail({ params }: ProductDetailProps) {
+export default async function Page({ params }: ProductDetailProps) {
   const { id } = params;
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
