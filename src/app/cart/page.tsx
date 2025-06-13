@@ -24,7 +24,6 @@ export default function Cart() {
     cartItems, 
     removeItem, 
     updateQuantity, 
-    updateVase, 
     getCartTotal, 
     getCartSubtotal, 
     getCartVasesTotal,
