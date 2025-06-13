@@ -18,8 +18,8 @@ export default function Services() {
 
       {/* Hero Section */}
       <section className="py-24 px-6 md:px-10 text-center">
-        <h1 className="text-4xl md:text-5xl font-light mb-4">Our Services</h1>
-        <p className="text-lg text-[#5f493b] max-w-3xl mx-auto leading-relaxed">
+        <h1 className="text-2xl md:text-3xl font-extralight mb-4">Our Services</h1>
+        <p className="text-base md:text-lg text-[#5f493b] max-w-3xl mx-auto leading-relaxed">
           From intimate celebrations to grand corporate spaces, we create bespoke eternal 
           flower arrangements that transform moments into lasting memories.
         </p>
@@ -31,7 +31,7 @@ export default function Services() {
           
           {/* Consumer Services Header */}
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-light uppercase tracking-wide mb-4">Personal Celebrations</h2>
+            <h2 className="text-2xl md:text-3xl font-extralight uppercase tracking-wide mb-4">Personal Celebrations</h2>
             <p className="text-[#5f493b] max-w-2xl mx-auto leading-relaxed">
               Mark life&apos;s most precious moments with arrangements designed to last as long as the memories they represent.
             </p>
@@ -112,7 +112,7 @@ export default function Services() {
 
           {/* Corporate Services Header */}
           <div className="text-center mb-16 pt-16 border-t border-[#dcd4c3]">
-            <h2 className="text-3xl font-light uppercase tracking-wide mb-4">Corporate & Commercial</h2>
+            <h2 className="text-2xl md:text-3xl font-extralight uppercase tracking-wide mb-4">Corporate & Commercial</h2>
             <p className="text-[#5f493b] max-w-2xl mx-auto leading-relaxed">
               Elevate professional spaces with sophisticated arrangements that reflect your brand&apos;s commitment to quality and elegance.
             </p>
@@ -173,7 +173,7 @@ export default function Services() {
           {/* Consultation CTA */}
           <div className="text-center py-16 bg-[#e7e2d5] -mx-6 md:-mx-10">
             <div className="px-6 md:px-10">
-              <h2 className="text-3xl font-light mb-6">Let&apos;s Create Something Beautiful Together</h2>
+              <h2 className="text-2xl md:text-3xl font-extralight mb-6">Let&apos;s Create Something Beautiful Together</h2>
               <p className="text-[#5f493b] mb-8 max-w-2xl mx-auto leading-relaxed">
                 Whether you&apos;re planning an intimate celebration or designing a commercial space, 
                 our team will work with you to create arrangements that perfectly capture your vision.

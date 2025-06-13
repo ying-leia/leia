@@ -18,8 +18,8 @@ export default function OurStory() {
 
       {/* Hero Section */}
       <section className="py-24 px-6 md:px-10 text-center">
-        <h1 className="text-4xl md:text-5xl font-light mb-4">Our Story</h1>
-        <p className="text-lg text-[#5f493b] max-w-3xl mx-auto leading-relaxed">
+        <h1 className="text-2xl md:text-3xl font-extralight mb-4">Our Story</h1>
+        <p className="text-base md:text-lg text-[#5f493b] max-w-3xl mx-auto leading-relaxed">
           Born from a childhood dream of flowers that never fade, leia preserves the quiet joy 
           of bringing something beautiful into your world — with no expiry date.
         </p>
@@ -43,7 +43,7 @@ export default function OurStory() {
               </div>
             </div>
             <div className="lg:col-span-2 space-y-6">
-              <h2 className="text-3xl font-light uppercase tracking-wide">The Beginning</h2>
+              <h2 className="text-2xl md:text-3xl font-extralight uppercase tracking-wide">The Beginning</h2>
               <p className="text-[#5f493b] leading-relaxed">
                 I&apos;ve loved flowers for as long as I can remember.
               </p>
@@ -59,7 +59,7 @@ export default function OurStory() {
           {/* Second Section - Text Left, Smaller Image Right */}
           <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 lg:gap-12 mb-20 items-start">
             <div className="lg:col-span-4 space-y-6">
-              <h2 className="text-3xl font-light uppercase tracking-wide">The Dream</h2>
+              <h2 className="text-2xl md:text-3xl font-extralight uppercase tracking-wide">The Dream</h2>
               <p className="text-[#5f493b] leading-relaxed">
                 That&apos;s where the dream of eternal flowers was born.
               </p>
@@ -89,7 +89,7 @@ export default function OurStory() {
           {/* Third Section - Central Small Image with Text Blocks */}
           <div className="mb-20">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-light uppercase tracking-wide mb-8">Our Philosophy</h2>
+              <h2 className="text-2xl md:text-3xl font-extralight uppercase tracking-wide mb-8">Our Philosophy</h2>
               <div className="max-w-md mx-auto aspect-square relative overflow-hidden">
                 <Image
                   src="/assets/products/solene/ikebana.jpg"
@@ -127,7 +127,7 @@ export default function OurStory() {
           {/* Call to Action */}
           <div className="text-center py-16 bg-[#e7e2d5] text-[#2f1c11] -mx-6 md:-mx-10">
             <div className="px-6 md:px-10">
-              <h2 className="text-3xl font-light mb-6">Experience Eternal Beauty</h2>
+              <h2 className="text-2xl md:text-3xl font-extralight mb-6">Experience Eternal Beauty</h2>
               <p className="text-[#5f493b] mb-8 max-w-2xl mx-auto leading-relaxed">
                 Discover arrangements that honor both the fleeting nature of flowers and the 
                 enduring power of beauty. Each piece is a promise that some things, when cherished 

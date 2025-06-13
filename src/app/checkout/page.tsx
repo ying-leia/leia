@@ -40,12 +40,12 @@ export default function Checkout() {
       <main className="w-full max-w-[100vw] overflow-x-hidden">
         <div className="pt-20 md:pt-24 px-4 sm:px-6 md:px-8 lg:px-10 pb-12 md:pb-16">
           <div className="max-w-6xl mx-auto">
-            <h1 className="text-2xl md:text-3xl font-light text-[#2f1c11] mb-6 md:mb-8">Checkout</h1>
+            <h1 className="text-2xl md:text-3xl font-extralight text-[#2f1c11] mb-6 md:mb-8">Checkout</h1>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-16">
               {/* Order Summary */}
               <div>
-                <h2 className="text-lg md:text-xl font-light text-[#2f1c11] mb-4 md:mb-6">Order Summary</h2>
+                <h2 className="text-2xl md:text-3xl font-extralight text-[#2f1c11] mb-4 md:mb-6">Order Summary</h2>
                 
                 <div className="bg-white border border-[#dcd4c3] rounded-lg p-4 sm:p-5 md:p-6">
                   {cartItems.length === 0 ? (
@@ -125,7 +125,7 @@ export default function Checkout() {
 
               {/* Payment Details */}
               <div>
-                <h2 className="text-lg md:text-xl font-light text-[#2f1c11] mb-4 md:mb-6">Payment Details</h2>
+                <h2 className="text-2xl md:text-3xl font-extralight text-[#2f1c11] mb-4 md:mb-6">Payment Details</h2>
                 
                 <div className="bg-white border border-[#dcd4c3] rounded-lg p-4 sm:p-5 md:p-6">
                   <div className="space-y-4 md:space-y-6">

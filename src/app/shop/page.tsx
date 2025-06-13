@@ -56,8 +56,8 @@ export default function Shop() {
 
       {/* Hero Section */}
       <section className="text-center py-24 px-6 md:px-10">
-        <h1 className="text-4xl md:text-5xl font-light mb-4">The Collection</h1>
-        <p className="text-lg text-[#5f493b] max-w-2xl mx-auto leading-relaxed">
+        <h1 className="text-2xl md:text-3xl font-extralight mb-4">The Collection</h1>
+        <p className="text-base md:text-lg text-[#5f493b] max-w-2xl mx-auto leading-relaxed">
           Discover our carefully curated selection of eternal flower arrangements, 
           each piece crafted to bring lasting beauty to your space.
         </p>
@@ -93,7 +93,7 @@ export default function Shop() {
 
       {/* Featured Info Section */}
       <section className="bg-[#e7e2d5] text-[#2f1c11] py-16 px-6 md:px-10 text-center">
-        <h2 className="text-3xl font-light mb-6">Why Choose Eternal Flowers?</h2>
+        <h2 className="text-2xl md:text-3xl font-extralight mb-6">Why Choose Eternal Flowers?</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <div>
             <h3 className="text-lg font-medium mb-3">Lasting Beauty</h3>

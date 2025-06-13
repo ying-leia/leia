@@ -74,14 +74,7 @@ export default function Cart() {
 
       <div className="px-6 md:px-10 py-12 pt-20 md:pt-12">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-light mb-8 flex items-center gap-3">
-            Shopping Cart
-            {getCartItemsCount() > 0 && (
-              <span className="bg-[#5F493B] text-white text-sm font-medium rounded-full w-6 h-6 flex items-center justify-center leading-none text-center">
-                {getCartItemsCount()}
-              </span>
-            )}
-          </h1>
+          <h1 className="text-2xl md:text-3xl font-extralight mb-8 flex items-center gap-3">Shopping Cart</h1>
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Cart Items */}
