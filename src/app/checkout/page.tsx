@@ -28,6 +28,13 @@ export default function Checkout() {
 
   return (
     <div className="min-h-screen bg-[#F8F5F2]">
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap');
+        body {
+          font-family: 'Playfair Display', serif;
+        }
+      `}</style>
+
       <Navigation currentPage="checkout" />
 
       <main className="w-full max-w-[100vw] overflow-x-hidden">
