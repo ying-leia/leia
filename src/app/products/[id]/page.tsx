@@ -6,7 +6,6 @@ import { useCart } from '../../../contexts/CartContext';
 import { getProductById, getSuggestedProducts, products } from '../../../data/products';
 import ProductCard from '../../../components/ProductCard';
 import Navigation from '../../../components/Navigation';
-import { use } from 'react';
 
 // Type definitions
 interface Product {
@@ -34,13 +33,13 @@ interface Vase {
 }
 
 interface ProductDetailProps {
-  params: Promise<{
+  params: {
     id: string;
-  }>;
+  };
 }
 
 export default function ProductDetail({ params }: ProductDetailProps) {
-  const { id } = use(params);
+  const { id } = params;
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [selectedVase, setSelectedVase] = useState<Vase | null>(null);
