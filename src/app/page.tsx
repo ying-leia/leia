@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { getFeaturedProducts, getOccasions } from "../data/products";
 import ProductCard from "../components/ProductCard";
-import { useCart } from "../contexts/CartContext";
 import Navigation from "../components/Navigation";
 
 export default function Home() {

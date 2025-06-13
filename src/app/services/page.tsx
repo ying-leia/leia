@@ -2,7 +2,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useCart } from "../../contexts/CartContext";
 import Navigation from '../../components/Navigation';
 
 export default function Services() {
