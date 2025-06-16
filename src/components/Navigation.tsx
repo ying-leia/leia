@@ -167,7 +167,7 @@ export default function Navigation({ currentPage }: NavigationProps) {
                   className="block hover:text-[#5F493B] transition-colors"
                   onClick={toggleMenu}
                 >
-                  Sign In | Register
+                  Account
                 </Link>
               </li>
             </ul>
@@ -216,6 +216,12 @@ export default function Navigation({ currentPage }: NavigationProps) {
               className={`hover:underline ${currentPage === 'contact' ? 'font-medium' : ''} ${isHomePage ? 'text-white drop-shadow-sm' : 'text-[#2f1c11]'}`}
             >
               Contact
+            </Link>
+            <Link 
+              href="/sign-in" 
+              className={`hover:underline ${isHomePage ? 'text-white drop-shadow-sm' : 'text-[#2f1c11]'}`}
+            >
+              Account
             </Link>
             <Link 
               href="/cart" 

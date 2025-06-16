@@ -44,7 +44,7 @@ export default function SignInRegister() {
       `}</style>
       <Navigation />
       <div className="max-w-md mx-auto pt-24 pb-12 px-4">
-        <h1 className="text-2xl md:text-3xl font-extralight mb-4 text-center">Sign In <span className="text-[#5f493b]">|</span> Register</h1>
+        <h1 className="text-2xl md:text-3xl font-extralight mb-4 text-center">Account</h1>
         <div className="flex justify-center gap-4 mb-8">
           <button
             className={`px-4 py-2 text-sm uppercase tracking-wide border-b-2 transition-all duration-200 ${tab === 'signIn' ? 'border-[#5F493B] text-[#5F493B]' : 'border-transparent text-[#2f1c11]'}`}
