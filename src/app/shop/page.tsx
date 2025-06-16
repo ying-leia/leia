@@ -55,22 +55,19 @@ export default function Shop() {
       <Navigation currentPage="shop" />
 
       {/* Hero Section */}
-      <section className="text-center py-24 px-6 md:px-10">
+      <section className="text-center pt-24 pb-8 px-6 md:px-10">
         <h1 className="text-2xl md:text-3xl font-extralight mb-4">The Collection</h1>
-        <p className="text-base md:text-lg text-[#5f493b] max-w-2xl mx-auto leading-relaxed">
-          Discover our carefully curated selection of eternal flower arrangements, 
-          each piece crafted to bring lasting beauty to your space.
-        </p>
+        <p className="text-base text-[#5f493b]">Eternal arrangements for every mood and moment.</p>
       </section>
 
       {/* Category Filter */}
-      <section className="px-6 md:px-10 mb-12">
-        <div className="flex flex-wrap justify-center gap-4">
+      <section className="px-6 md:px-10 mb-6">
+        <div className="flex flex-nowrap overflow-x-auto gap-4 scrollbar-hide">
           {categories.map((category) => (
             <button
               key={category.id}
               onClick={() => setFilter(category.id)}
-              className={`px-6 py-2 text-sm uppercase tracking-wide transition-all duration-200 ${
+              className={`px-4 py-1.5 text-sm uppercase tracking-wide transition-all duration-200 whitespace-nowrap ${
                 filter === category.id
                   ? 'bg-[#5F493B] text-white'
                   : 'bg-[#e7e2d5] text-[#2f1c11] hover:bg-[#dcd4c3]'

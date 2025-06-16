@@ -30,7 +30,7 @@ export default function Navigation({ currentPage }: NavigationProps) {
     <>
       {/* Mobile Header */}
       <header className={`fixed top-0 left-0 w-full z-50 md:hidden ${isHomePage ? 'bg-transparent' : 'bg-white'}`}>
-        <div className="flex items-center justify-between px-6 py-4">
+        <div className="flex items-center justify-between px-4 py-2">
           {/* Hamburger Menu */}
           <button
             onClick={toggleMenu}
@@ -68,7 +68,7 @@ export default function Navigation({ currentPage }: NavigationProps) {
             >
               {cartItemsCount > 0 ? (
                 <div className="w-7 h-7 border border-current rounded-full flex items-center justify-center">
-                  <span className="text-sm font-medium leading-[1]">
+                  <span className="text-sm font-medium leading-none" style={{fontFamily: 'inherit'}}>
                     {cartItemsCount}
                   </span>
                 </div>
@@ -93,24 +93,26 @@ export default function Navigation({ currentPage }: NavigationProps) {
         </div>
       </header>
 
+      {/* Side Drawer Overlay with medium opacity */}
+      {isMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 md:hidden"
+          onClick={toggleMenu}
+        />
+      )}
+
       {/* Side Drawer */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 md:hidden ${
-          isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-        onClick={toggleMenu}
-      />
-
-      <div
-        className={`fixed top-0 left-0 bottom-0 w-64 bg-[#F8F5F2] z-50 transform transition-transform duration-300 ease-in-out md:hidden ${
+        className={`fixed top-0 left-0 bottom-0 w-64 bg-[#F8F5F2] z-50 shadow-2xl transform transition-transform duration-300 ease-in-out md:hidden ${
           isMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <div className="flex flex-col h-full">
-          <div className="p-6 border-b border-[#dcd4c3]">
+          <div className="flex items-center justify-between px-4 py-2 border-b border-[#dcd4c3]">
             <Link href="/" className="text-3xl font-medium tracking-wide text-[#2f1c11]">
               leia
             </Link>
+            <div></div>
           </div>
           
           <nav className="flex-1 px-6 py-8">
@@ -157,6 +159,15 @@ export default function Navigation({ currentPage }: NavigationProps) {
                   onClick={toggleMenu}
                 >
                   Contact
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/sign-in"
+                  className="block hover:text-[#5F493B] transition-colors"
+                  onClick={toggleMenu}
+                >
+                  Sign In | Register
                 </Link>
               </li>
             </ul>
@@ -212,7 +223,7 @@ export default function Navigation({ currentPage }: NavigationProps) {
             >
               Cart
               {cartItemsCount > 0 && (
-                <span className={`text-sm font-medium rounded-full w-5 h-5 flex items-center justify-center leading-none ${isHomePage ? 'bg-white text-[#2f1c11]' : 'bg-[#5F493B] text-white'}`}>
+                <span className={`text-sm font-medium rounded-full w-5 h-5 flex items-center justify-center leading-none ${isHomePage ? 'bg-white text-[#2f1c11]' : 'bg-[#5F493B] text-white'}`} style={{fontFamily: 'inherit'}}>
                   {cartItemsCount}
                 </span>
               )}

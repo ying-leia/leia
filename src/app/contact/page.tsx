@@ -25,10 +25,9 @@ export default function Contact() {
 
       <Navigation />
 
-      <div className="px-6 md:px-10 py-12">
-        <main className="flex-1 flex flex-col items-center justify-center px-4 py-16">
+      <div className="px-6 md:px-10 pt-24 pb-12">
+        <main className="flex-1 flex flex-col items-center justify-center px-4">
           <h1 className="text-2xl md:text-3xl font-extralight mb-4 text-center">Contact Us</h1>
-          <h2 className="text-2xl md:text-3xl font-extralight uppercase tracking-wide mb-4">Get in Touch</h2>
           <p className="text-[#5f493b] mb-12 max-w-2xl mx-auto leading-relaxed">
             We&apos;d love to hear from you. Whether you have a question about our arrangements, 
             need help with an order, or want to discuss a custom project, we&apos;re here to help.
