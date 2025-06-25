@@ -1,4 +1,4 @@
-  // Trigger clean redeployrequire('dotenv').config();
+  // Trigger clean re deployrequire('dotenv').config();
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');

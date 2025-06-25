@@ -36,7 +36,7 @@ export default function Shop() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('http://localhost:4000/inventory')
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/inventory`)
       .then(res => res.json())
       .then((inventory: { id: string; stock: number; preorderAvailable: boolean }[]) => {
         const merged = localProducts.map(p => {

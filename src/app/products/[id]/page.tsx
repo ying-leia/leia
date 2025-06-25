@@ -59,7 +59,7 @@ export default function ProductDetail({ params }: ProductDetailProps) {
   useEffect(() => {
     const foundProduct = getProductById(id);
     if (foundProduct) {
-      fetch(`http://localhost:4000/inventory/${id}`)
+      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/inventory/${id}`)
         .then(res => res.json())
         .then(inv => {
           setProduct({ ...foundProduct, stock: inv.stock, preorderAvailable: !!inv.preorderAvailable });
@@ -84,7 +84,7 @@ export default function ProductDetail({ params }: ProductDetailProps) {
   const handleOrder = () => {
     if (!product) return;
     setOrderStatus('pending');
-    fetch('http://localhost:4000/orders', {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/orders`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ productId: product.id, quantity: 1 })
@@ -346,7 +346,7 @@ export default function ProductDetail({ params }: ProductDetailProps) {
                     value={product.stock}
                     onChange={e => {
                       const newStock = parseInt(e.target.value, 10);
-                      fetch(`http://localhost:4000/inventory/${product.id}/stock`, {
+                      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/inventory/${product.id}/stock`, {
                         method: 'PATCH',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ stock: newStock })
@@ -366,7 +366,7 @@ export default function ProductDetail({ params }: ProductDetailProps) {
                     checked={product.preorderAvailable}
                     onChange={e => {
                       const preorderAvailable = e.target.checked;
-                      fetch(`http://localhost:4000/inventory/${product.id}/preorder`, {
+                      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/inventory/${product.id}/preorder`, {
                         method: 'PATCH',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ preorderAvailable })

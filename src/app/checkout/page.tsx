@@ -33,7 +33,7 @@ export default function Checkout() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('http://localhost:4000/create-checkout-session', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/create-checkout-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ cartItems }),
