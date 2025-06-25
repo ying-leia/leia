@@ -44,4 +44,4 @@ next-env.d.ts
 inventory.db
 
 # backend
-backend.js
+# backend.js
