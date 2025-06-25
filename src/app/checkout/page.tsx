@@ -32,6 +32,7 @@ export default function Checkout() {
   const handleCheckout = async () => {
     setLoading(true);
     setError(null);
+    console.log('BACKEND_URL:', process.env.NEXT_PUBLIC_BACKEND_URL);
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/create-checkout-session`, {
         method: 'POST',
