@@ -43,8 +43,8 @@ export default function Checkout() {
       const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
       if (!stripe) throw new Error('Stripe.js failed to load');
       await stripe.redirectToCheckout({ sessionId: data.sessionId });
-    } catch (err: any) {
-      setError(err.message || 'Checkout failed');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Checkout failed');
       setLoading(false);
     }
   };
@@ -153,9 +153,15 @@ export default function Checkout() {
                 <div className="bg-white border border-[#dcd4c3] rounded-lg p-4 sm:p-5 md:p-6">
                   <div className="space-y-4 md:space-y-6">
                     <div className="flex flex-col items-center gap-3 mb-2">
-                      <img src="https://stripe.com/img/v3/home/twitter.png" alt="Stripe" className="h-8 w-auto mb-1" style={{filter: 'grayscale(1)'}} />
+                      <Image
+                        src="https://stripe.com/img/v3/home/twitter.png"
+                        alt="Stripe"
+                        height={32}
+                        width={100}
+                        className="h-8 w-auto mb-1 grayscale"
+                      />
                       <p className="text-[#2f1c11] text-base font-medium">Pay securely with Stripe</p>
-                      <p className="text-[#5f493b] text-xs">All major cards accepted. You'll be redirected to Stripe's secure checkout to complete your purchase.</p>
+                      <p className="text-[#5f493b] text-xs">All major cards accepted. You&apos;ll be redirected to Stripe&apos;s secure checkout to complete your purchase.</p>
                     </div>
                     <button
                       className="w-full bg-[#635bff] text-white py-3 md:py-4 text-base font-semibold rounded shadow-sm uppercase tracking-wide hover:bg-[#2f1c11] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"

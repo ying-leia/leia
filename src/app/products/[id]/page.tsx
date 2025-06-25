@@ -3,7 +3,6 @@ import React, { useState, useEffect, use } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '../../../contexts/CartContext';
-import { getProductImages, getAvailableVases } from '../../../data/imageRegistry';
 import { getProductById, getSuggestedProducts, products } from '../../../data/products';
 import ProductCard from '../../../components/ProductCard';
 import Navigation from '../../../components/Navigation';

@@ -38,9 +38,9 @@ export default function Shop() {
   useEffect(() => {
     fetch('http://localhost:4000/inventory')
       .then(res => res.json())
-      .then(inventory => {
+      .then((inventory: { id: string; stock: number; preorderAvailable: boolean }[]) => {
         const merged = localProducts.map(p => {
-          const inv = inventory.find((i: any) => i.id === p.id);
+          const inv = inventory.find((i) => i.id === p.id);
           return {
             ...p,
             stock: inv ? inv.stock : 0,
@@ -50,7 +50,7 @@ export default function Shop() {
         setProducts(merged);
         setLoading(false);
       })
-      .catch(err => {
+      .catch(() => {
         setError('Failed to fetch inventory');
         setLoading(false);
       });
