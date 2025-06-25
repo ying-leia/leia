@@ -1,8 +1,9 @@
-  // Trigger redeployrequire('dotenv').config();
+require('dotenv').config();
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const cors = require('cors');
 
 const DB_FILE = process.env.DB_FILE || 'inventory.db';
 const PORT = process.env.PORT || 4000;
@@ -49,15 +50,8 @@ db.serialize(() => {
 });
 
 const app = express();
+app.use(cors({ origin: 'https://leiaflora.com' }));
 app.use(bodyParser.json());
-
-// CORS for frontend
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,PATCH,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
 
 // GET /inventory/:id
 app.get('/inventory/:id', (req, res) => {
