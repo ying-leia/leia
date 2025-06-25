@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '../../contexts/CartContext';
 import Navigation from '../../components/Navigation';
+import { loadStripe } from '@stripe/stripe-js';
 
 interface CartItem {
   cartId: string;
@@ -25,6 +26,28 @@ export default function Checkout() {
     formatPrice,
     removeItem 
   } = useCart();
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
+
+  const handleCheckout = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch('http://localhost:4000/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cartItems }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to create checkout session');
+      const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+      if (!stripe) throw new Error('Stripe.js failed to load');
+      await stripe.redirectToCheckout({ sessionId: data.sessionId });
+    } catch (err: any) {
+      setError(err.message || 'Checkout failed');
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#F8F5F2]">
@@ -129,17 +152,20 @@ export default function Checkout() {
                 
                 <div className="bg-white border border-[#dcd4c3] rounded-lg p-4 sm:p-5 md:p-6">
                   <div className="space-y-4 md:space-y-6">
-                    {/* Placeholder for payment form */}
-                    <div className="p-4 sm:p-6 md:p-8 border-2 border-dashed border-[#dcd4c3] rounded-lg text-center">
-                      <p className="text-[#5f493b]">Payment form will be implemented here</p>
+                    <div className="flex flex-col items-center gap-3 mb-2">
+                      <img src="https://stripe.com/img/v3/home/twitter.png" alt="Stripe" className="h-8 w-auto mb-1" style={{filter: 'grayscale(1)'}} />
+                      <p className="text-[#2f1c11] text-base font-medium">Pay securely with Stripe</p>
+                      <p className="text-[#5f493b] text-xs">All major cards accepted. You'll be redirected to Stripe's secure checkout to complete your purchase.</p>
                     </div>
-
                     <button
-                      className="w-full bg-[#5F493B] text-white py-3 md:py-4 text-sm uppercase tracking-wide hover:bg-[#2f1c11] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                      disabled={cartItems.length === 0}
+                      className="w-full bg-[#635bff] text-white py-3 md:py-4 text-base font-semibold rounded shadow-sm uppercase tracking-wide hover:bg-[#2f1c11] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                      disabled={cartItems.length === 0 || loading}
+                      onClick={handleCheckout}
                     >
-                      Complete Purchase
+                      <svg height="20" viewBox="0 0 40 40" width="20" xmlns="http://www.w3.org/2000/svg"><g fill="none" fillRule="evenodd"><rect fill="#635bff" height="40" rx="8" width="40"/><path d="M28.5 15.5c-.3-2.1-2.1-3.5-4.7-3.5h-7.6c-.2 0-.4.2-.4.4v15.2c0 .2.2.4.4.4h2.7c.2 0 .4-.2.4-.4v-4.7h3.2c2.9 0 4.7-1.5 4.7-4 0-1.7-1-2.9-2.7-3.2zm-4.3 4.2h-3.2v-4.1h3.2c1.5 0 2.3.7 2.3 2 0 1.3-.8 2.1-2.3 2.1z" fill="#fff"/></g></svg>
+                      {loading ? 'Redirecting to Stripe...' : 'Pay with Stripe'}
                     </button>
+                    {error && <div className="text-red-600 text-sm mt-2 text-center">{error}</div>}
                   </div>
                 </div>
               </div>

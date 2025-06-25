@@ -1,9 +1,9 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { products } from '../../data/products';
 import ProductGrid from '../../components/ProductGrid';
 import Navigation from '../../components/Navigation';
+import { products as localProducts } from '../../data/products';
 
 interface Product {
   id: string;
@@ -24,13 +24,40 @@ interface Product {
   category: string;
   tags: string[];
   suggestedProducts: string[];
+  slug?: string;
+  stock: number;
+  preorderAvailable: boolean;
 }
 
 export default function Shop() {
   const [filter, setFilter] = useState('all');
+  const [products, setProducts] = useState(localProducts.map(p => ({ ...p, stock: 0, preorderAvailable: false })));
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const filteredProducts: Product[] = filter === 'all' 
-    ? products 
+  useEffect(() => {
+    fetch('http://localhost:4000/inventory')
+      .then(res => res.json())
+      .then(inventory => {
+        const merged = localProducts.map(p => {
+          const inv = inventory.find((i: any) => i.id === p.id);
+          return {
+            ...p,
+            stock: inv ? inv.stock : 0,
+            preorderAvailable: inv ? !!inv.preorderAvailable : false,
+          };
+        });
+        setProducts(merged);
+        setLoading(false);
+      })
+      .catch(err => {
+        setError('Failed to fetch inventory');
+        setLoading(false);
+      });
+  }, []);
+
+  const filteredProducts: Product[] = filter === 'all'
+    ? products
     : products.filter(product => product.category === filter);
 
   const categories = [
@@ -81,11 +108,17 @@ export default function Shop() {
 
       {/* Products Grid */}
       <section className="px-6 md:px-10 pb-20">
-        <ProductGrid 
-          products={filteredProducts}
-          columns="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-          spacing="gap-6 md:gap-8"
-        />
+        {loading ? (
+          <div className="text-center py-12 text-[#5f493b] text-lg">Loading products...</div>
+        ) : error ? (
+          <div className="text-center py-12 text-[#b00020] text-lg">{error}</div>
+        ) : (
+          <ProductGrid 
+            products={filteredProducts}
+            columns="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+            spacing="gap-6 md:gap-8"
+          />
+        )}
       </section>
 
       {/* Featured Info Section */}

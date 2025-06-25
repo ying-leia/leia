@@ -3,6 +3,7 @@ import React, { useState, useEffect, use } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '../../../contexts/CartContext';
+import { getProductImages, getAvailableVases } from '../../../data/imageRegistry';
 import { getProductById, getSuggestedProducts, products } from '../../../data/products';
 import ProductCard from '../../../components/ProductCard';
 import Navigation from '../../../components/Navigation';
@@ -22,6 +23,9 @@ interface Product {
   category: string;
   tags: string[];
   suggestedProducts: string[];
+  slug?: string;
+  stock?: number;
+  preorderAvailable?: boolean;
 }
 
 interface Vase {
@@ -46,24 +50,60 @@ export default function ProductDetail({ params }: ProductDetailProps) {
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
   const [suggestedProducts, setSuggestedProducts] = useState<Product[]>([]);
   const [allProducts, setAllProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [orderStatus, setOrderStatus] = useState<string | null>(null);
   
   const { addItem, formatPrice } = useCart();
+  const isAdmin = false; // Set to false for production so admin controls are hidden
 
   useEffect(() => {
     const foundProduct = getProductById(id);
     if (foundProduct) {
-      setProduct(foundProduct);
-      setSelectedVase(foundProduct.availableVases[0] || null);
-      setSuggestedProducts(getSuggestedProducts(id).filter((p): p is Product => p !== undefined));
-      // Get all products except current one for "Uncover More Creations"
-      setAllProducts(products.filter(p => p.id !== id));
+      fetch(`http://localhost:4000/inventory/${id}`)
+        .then(res => res.json())
+        .then(inv => {
+          setProduct({ ...foundProduct, stock: inv.stock, preorderAvailable: !!inv.preorderAvailable });
+          setSelectedVase(foundProduct.availableVases[0] || null);
+          setSuggestedProducts(getSuggestedProducts(id).filter((p): p is Product => p !== undefined).map(p => ({ ...p, stock: 0, preorderAvailable: false })));
+          setAllProducts(products.filter(p => p.id !== id).map(p => ({ ...p, stock: 0, preorderAvailable: false })));
+          setLoading(false);
+        })
+        .catch(() => {
+          setProduct({ ...foundProduct, stock: 0, preorderAvailable: false });
+          setSelectedVase(foundProduct.availableVases[0] || null);
+          setSuggestedProducts(getSuggestedProducts(id).filter((p): p is Product => p !== undefined).map(p => ({ ...p, stock: 0, preorderAvailable: false })));
+          setAllProducts(products.filter(p => p.id !== id).map(p => ({ ...p, stock: 0, preorderAvailable: false })));
+          setLoading(false);
+        });
+    } else {
+      setError('Product not found.');
+      setLoading(false);
     }
   }, [id]);
 
-  const handleAddToCart = () => {
-    if (product) {
-      addItem(product, selectedVase, 1);
-    }
+  const handleOrder = () => {
+    if (!product) return;
+    setOrderStatus('pending');
+    fetch('http://localhost:4000/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ productId: product.id, quantity: 1 })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          if (data.type === 'purchase') {
+            addItem(product, selectedVase, 1);
+            setOrderStatus('added');
+          } else if (data.type === 'preorder') {
+            setOrderStatus('preordered');
+          }
+        } else {
+          setOrderStatus('error');
+        }
+      })
+      .catch(() => setOrderStatus('error'));
   };
 
   const toggleSection = (section: string) => {
@@ -71,21 +111,28 @@ export default function ProductDetail({ params }: ProductDetailProps) {
   };
 
   const getCurrentProductImage = () => {
-    if (!product) return '';
-    
+    if (!product) return '/assets/placeholder.jpg';
     // If a vase is selected and has a product image, use that
     if (selectedVase && selectedVase.productImage) {
-      return selectedVase.productImage;
+      return selectedVase.productImage || '/assets/placeholder.jpg';
     }
-    
     // Otherwise use the selected image from the product gallery
-    return product.images[selectedImageIndex];
+    return product.images && product.images[selectedImageIndex]
+      ? product.images[selectedImageIndex]
+      : '/assets/placeholder.jpg';
   };
 
-  if (!product) {
+  if (loading) {
     return (
       <div className="min-h-screen bg-[#F8F5F2] flex items-center justify-center">
-        <p className="text-[#5f493b] text-lg">Product not found.</p>
+        <p className="text-[#5f493b] text-lg">Loading product...</p>
+      </div>
+    );
+  }
+  if (error || !product) {
+    return (
+      <div className="min-h-screen bg-[#F8F5F2] flex items-center justify-center">
+        <p className="text-[#b00020] text-lg">{error || 'Product not found.'}</p>
       </div>
     );
   }
@@ -140,7 +187,7 @@ export default function ProductDetail({ params }: ProductDetailProps) {
                   }`}
                 >
                   <Image
-                    src={image}
+                    src={image || '/assets/placeholder.jpg'}
                     alt={`${product.name} view ${index + 1}`}
                     fill
                     sizes="80px"
@@ -174,7 +221,7 @@ export default function ProductDetail({ params }: ProductDetailProps) {
                     >
                       <div className="aspect-square relative mb-2 overflow-hidden">
                         <Image
-                          src={vase.image}
+                          src={vase.image || '/assets/placeholder.jpg'}
                           alt={vase.name}
                           fill
                           sizes="150px"
@@ -258,15 +305,83 @@ export default function ProductDetail({ params }: ProductDetailProps) {
               </div>
             </div>
 
-            {/* Add to Cart - Desktop */}
-            <div className="hidden lg:block">
+            {/* Add to Cart / Preorder Button */}
+            <div className="mt-6">
+              {orderStatus === 'added' && (
+                <div className="text-green-700 mb-2">Added to cart!</div>
+              )}
+              {orderStatus === 'preordered' && (
+                <div className="text-blue-700 mb-2">Pre-order placed!</div>
+              )}
+              {orderStatus === 'error' && (
+                <div className="text-red-700 mb-2">Could not place order. Please try again.</div>
+              )}
               <button
-                onClick={handleAddToCart}
-                className="w-full bg-[#5F493B] text-white py-4 text-sm uppercase tracking-wide hover:bg-[#2f1c11] transition-colors duration-200"
+                onClick={handleOrder}
+                className={`w-full py-3 text-white text-lg font-medium rounded transition-colors duration-200 ${
+                  (product.stock ?? 0) === 0 && (product.preorderAvailable ?? false)
+                    ? 'bg-blue-600 hover:bg-blue-700'
+                    : (product.stock ?? 0) > 0
+                    ? 'bg-[#5F493B] hover:bg-[#2f1c11]'
+                    : 'bg-gray-400 cursor-not-allowed'
+                }`}
+                disabled={(product.stock ?? 0) === 0 && !(product.preorderAvailable ?? false)}
               >
-                Add to Cart
+                {(product.stock ?? 0) === 0 && (product.preorderAvailable ?? false)
+                  ? 'Pre-order'
+                  : (product.stock ?? 0) > 0
+                  ? 'Add to Cart'
+                  : 'Out of Stock'}
               </button>
             </div>
+
+            {/* Admin Controls: Update Stock & Preorder */}
+            {isAdmin && (
+              <div className="mt-10 p-4 border border-dashed border-[#5f493b] bg-[#f9f6f2] rounded">
+                <h3 className="text-lg font-medium mb-2">Admin: Update Inventory</h3>
+                <div className="flex items-center gap-4 mb-2">
+                  <label className="text-sm">Stock:</label>
+                  <input
+                    type="number"
+                    min={0}
+                    value={product.stock}
+                    onChange={e => {
+                      const newStock = parseInt(e.target.value, 10);
+                      fetch(`http://localhost:4000/inventory/${product.id}/stock`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ stock: newStock })
+                      })
+                        .then(res => res.json())
+                        .then(data => {
+                          if (data.success) setProduct(prev => prev ? { ...prev, stock: newStock } : prev);
+                        });
+                    }}
+                    className="border px-2 py-1 w-20"
+                  />
+                </div>
+                <div className="flex items-center gap-4">
+                  <label className="text-sm">Preorder Available:</label>
+                  <input
+                    type="checkbox"
+                    checked={product.preorderAvailable}
+                    onChange={e => {
+                      const preorderAvailable = e.target.checked;
+                      fetch(`http://localhost:4000/inventory/${product.id}/preorder`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ preorderAvailable })
+                      })
+                        .then(res => res.json())
+                        .then(data => {
+                          if (data.success) setProduct(prev => prev ? { ...prev, preorderAvailable } : prev);
+                        });
+                    }}
+                    className="w-5 h-5"
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -280,12 +395,12 @@ export default function ProductDetail({ params }: ProductDetailProps) {
               {[...allProducts, ...allProducts].map((product, index) => (
                 <Link
                   key={`${product.id}-${index}`}
-                  href={`/products/${product.id}`}
+                  href={`/products/${product.id || product.slug}`}
                   className="flex-shrink-0 w-64 block"
                 >
                   <div className="aspect-[4/5] relative overflow-hidden">
                     <Image
-                      src={product.images[0]}
+                      src={product.images[0] || '/assets/placeholder.jpg'}
                       alt={product.name}
                       fill
                       sizes="256px"
@@ -311,16 +426,6 @@ export default function ProductDetail({ params }: ProductDetailProps) {
             </div>
           </div>
         )}
-      </div>
-
-      {/* Sticky Add to Cart - Mobile */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-[#dcd4c3] p-4 z-50">
-        <button
-          onClick={handleAddToCart}
-          className="w-full bg-[#5F493B] text-white py-4 text-sm uppercase tracking-wide hover:bg-[#2f1c11] transition-colors duration-200"
-        >
-          Add to Cart {selectedVase && `• ${formatPrice(product.price + selectedVase.price)}`}
-        </button>
       </div>
 
       {/* Auto-scroll animation styles */}

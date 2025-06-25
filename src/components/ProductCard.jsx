@@ -33,9 +33,7 @@ const ProductCard = ({ product, className = '' }) => {
     );
   };
 
-  const currentImage = product.images && product.images.length > 0 
-    ? product.images[currentImageIndex] 
-    : '/assets/fire.jpg'; // Fallback to a real image
+  const currentImage = product.images && product.images[0] ? product.images[0] : '/assets/placeholder.jpg';
 
   return (
     <Link href={`/products/${product.id}`} className={`group block ${className}`}>
@@ -44,14 +42,10 @@ const ProductCard = ({ product, className = '' }) => {
         <div className="relative aspect-[4/5] w-full overflow-hidden">
           <Image
             src={currentImage}
-            alt={`${product.name} - Image ${currentImageIndex + 1}`}
+            alt={product.name}
             fill
-            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-            onError={(e) => {
-              // Fallback if image fails to load
-              e.currentTarget.src = '/assets/fire.jpg';
-            }}
+            sizes="256px"
+            className="object-cover hover:scale-105 transition-transform duration-300"
           />
           
           {/* Image Navigation - Only show if multiple images */}
