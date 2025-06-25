@@ -50,7 +50,7 @@ db.serialize(() => {
 });
 
 const app = express();
-app.use(cors({ origin: 'https://leiaflora.com' }));
+app.use(cors());
 app.use(bodyParser.json());
 
 // GET /inventory/:id
