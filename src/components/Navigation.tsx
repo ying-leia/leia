@@ -39,7 +39,7 @@ export default function Navigation({ currentPage }: NavigationProps) {
   return (
     <>
       {/* Mobile Header */}
-      <header className={`fixed top-0 left-0 w-full z-50 md:hidden ${isHomePage ? (scrolled ? 'bg-white border-b border-[#dcd4c3]' : 'bg-transparent') : 'bg-white'}`} style={{ fontFamily: 'Playfair Display, serif' }}>
+      <header className={`fixed top-0 left-0 w-full z-[100] md:hidden ${isHomePage ? (scrolled ? 'bg-white border-b border-[#dcd4c3]' : 'bg-transparent') : 'bg-white'}`} style={{ fontFamily: 'Playfair Display, serif', pointerEvents: 'auto', zIndex: 100 }}>
         <div className="flex items-center justify-between px-4 py-2 min-h-[48px]">
           {/* Hamburger Menu */}
           <button
@@ -188,7 +188,7 @@ export default function Navigation({ currentPage }: NavigationProps) {
       </div>
 
       {/* Desktop Header */}
-      <header className={`hidden md:block fixed top-0 left-0 w-full z-50`} style={{ fontFamily: 'Playfair Display, serif' }}>
+      <header className={`hidden md:block fixed top-0 left-0 w-full z-[100]`} style={{ fontFamily: 'Playfair Display, serif', pointerEvents: 'auto', zIndex: 100 }}>
         <div className={`flex items-center justify-between px-10 py-6 uppercase tracking-wide ${isHomePage ? (scrolled ? 'bg-white border-b border-[#dcd4c3]' : 'bg-transparent') : 'bg-white border-b border-[#dcd4c3]'}`}>
           <nav className="flex gap-8 text-sm items-center flex-1 justify-start">
             <Link 
