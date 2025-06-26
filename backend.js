@@ -29,23 +29,16 @@ db.serialize(() => {
     preorderAvailable INTEGER NOT NULL DEFAULT 0
   )`);
 
-  // Remove inventory rows not in localProducts
-  db.all('SELECT id FROM inventory', [], (err, rows) => {
-    if (!err && rows) {
-      const idsToRemove = rows.filter(row => !localProducts.find(p => p.id === row.id)).map(row => row.id);
-      idsToRemove.forEach(id => {
-        db.run('DELETE FROM inventory WHERE id = ?', [id]);
-      });
-    }
-  });
-
-  // Add or update inventory for all local products
-  localProducts.forEach(p => {
-    db.get('SELECT * FROM inventory WHERE id = ?', [p.id], (err, row) => {
-      if (!row) {
+  // Only seed inventory if table is empty
+  db.all('SELECT COUNT(*) as count FROM inventory', [], (err, rows) => {
+    if (!err && rows && rows[0].count === 0) {
+      localProducts.forEach(p => {
         db.run('INSERT INTO inventory (id, stock, preorderAvailable) VALUES (?, ?, ?)', [p.id, 10, 0]);
-      }
-    });
+      });
+      console.log('Inventory seeded with initial products.');
+    } else {
+      console.log('Inventory already exists, not reseeding.');
+    }
   });
 });
 
