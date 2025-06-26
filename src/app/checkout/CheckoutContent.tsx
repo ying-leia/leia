@@ -63,18 +63,24 @@ export default function Checkout() {
   if (success) {
     return (
       <div className="min-h-screen bg-[#F8F5F2] flex flex-col">
-        <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap');
-          body {
-            font-family: 'Playfair Display', serif;
-          }
-        `}</style>
         <Navigation currentPage="checkout" />
         <div className="flex flex-1 flex-col items-center justify-center">
-          <div className="max-w-md mx-auto bg-white border border-[#dcd4c3] rounded-lg p-8 text-center shadow mt-20">
-            <h1 className="text-2xl md:text-3xl font-extralight text-[#2f1c11] mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>Thank you for your purchase!</h1>
-            <p className="text-[#5f493b] mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>Your order has been received and is being processed. You will receive a confirmation email shortly.</p>
-            <Link href="/shop" className="inline-block bg-[#5F493B] text-white px-6 py-3 rounded hover:bg-[#2f1c11] transition-colors duration-200" style={{ fontFamily: 'Playfair Display, serif' }}>Continue Shopping</Link>
+          <div
+            className="max-w-md mx-auto bg-white border border-[#dcd4c3] rounded-lg p-8 text-center shadow mt-20"
+            style={{ fontFamily: 'Playfair Display, serif' }}
+          >
+            <h1 className="text-2xl md:text-3xl font-extralight text-[#2f1c11] mb-4">
+              Thank you for your purchase!
+            </h1>
+            <p className="text-[#5f493b] mb-6">
+              Your order has been received and is being processed. You will receive a confirmation email shortly.
+            </p>
+            <Link
+              href="/shop"
+              className="inline-block bg-[#5F493B] text-white px-6 py-3 rounded hover:bg-[#2f1c11] transition-colors duration-200"
+            >
+              Continue Shopping
+            </Link>
           </div>
         </div>
       </div>
