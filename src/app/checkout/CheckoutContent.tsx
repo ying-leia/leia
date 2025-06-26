@@ -64,10 +64,10 @@ export default function Checkout() {
     return (
       <div className="min-h-screen bg-[#F8F5F2] flex flex-col">
         <Navigation currentPage="checkout" />
-        <div className="flex flex-1 flex-col items-center justify-center">
+        <div className="flex-grow flex items-center justify-center min-h-[60vh]">
           <div
             className="max-w-md mx-auto bg-white border border-[#dcd4c3] rounded-lg p-8 text-center shadow mt-20"
-            style={{ fontFamily: 'Playfair Display, serif' }}
+            style={{ fontFamily: 'Playfair Display, serif', background: 'rgba(255,0,0,0.1)' }}
           >
             <h1 className="text-2xl md:text-3xl font-extralight text-[#2f1c11] mb-4">
               Thank you for your purchase!
@@ -75,12 +75,12 @@ export default function Checkout() {
             <p className="text-[#5f493b] mb-6">
               Your order has been received and is being processed. You will receive a confirmation email shortly.
             </p>
-            <Link
+            <a
               href="/shop"
               className="inline-block bg-[#5F493B] text-white px-6 py-3 rounded hover:bg-[#2f1c11] transition-colors duration-200"
             >
               Continue Shopping
-            </Link>
+            </a>
           </div>
         </div>
       </div>
