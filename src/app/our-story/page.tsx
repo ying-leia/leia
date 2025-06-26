@@ -20,7 +20,7 @@ export default function OurStory() {
       <section className="py-24 px-6 md:px-10 text-center">
         <h1 className="text-2xl md:text-3xl font-extralight mb-4">Our Story</h1>
         <p className="text-base md:text-lg text-[#5f493b] max-w-3xl mx-auto leading-relaxed">
-          Born from a childhood dream of flowers that never fade, leia preserves the quiet joy 
+          Born from a childhood dream of flowers that never fade, Leia preserves the quiet joy 
           of bringing something beautiful into your world — with no expiry date.
         </p>
       </section>
@@ -70,7 +70,7 @@ export default function OurStory() {
                 I dreamed of bouquets that looked just as wild, soft, and magical as fresh blooms — but ones I could keep without watching them fade.
               </p>
               <p className="text-[#5f493b] leading-relaxed">
-                As I grew older, that childhood dream stayed with me. And now, at 25, with a deeper understanding of the environmental cost of floristry — the short lifespan of fresh-cut flowers, the carbon footprint of constant imports, the waste that piles up week after week — I felt an even stronger pull to bring leia to life.
+                As I grew older, that childhood dream stayed with me. And now, at 25, with a deeper understanding of the environmental cost of floristry — the short lifespan of fresh-cut flowers, the carbon footprint of constant imports, the waste that piles up week after week — I felt an even stronger pull to bring Leia to life.
               </p>
             </div>
             <div className="lg:col-span-3">
@@ -105,7 +105,7 @@ export default function OurStory() {
               <div className="space-y-4">
                 <h3 className="text-xl font-medium uppercase tracking-wide">Intention</h3>
                 <p className="text-[#5f493b] leading-relaxed">
-                  So I began leia from that seed of longing — to create the kind of floral arrangements I always wished existed. Ones that feel dreamlike, intentional, and lasting. I design each piece the way I used to imagine them when I was nine — not just for how they look, but for what they make you feel.
+                  So I began Leia from that seed of longing — to create the kind of floral arrangements I always wished existed. Ones that feel dreamlike, intentional, and lasting. I design each piece the way I used to imagine them when I was nine — not just for how they look, but for what they make you feel.
                 </p>
               </div>
               <div className="space-y-4">
@@ -117,7 +117,7 @@ export default function OurStory() {
                   <p className="text-[#5f493b] leading-relaxed italic">
                     With love,<br/>
                     Ying Yeo<br/>
-                    Founder of leia
+                    Founder of Leia
                   </p>
                 </div>
               </div>
