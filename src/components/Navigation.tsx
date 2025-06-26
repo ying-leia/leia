@@ -39,12 +39,24 @@ export default function Navigation({ currentPage }: NavigationProps) {
   return (
     <>
       {/* Mobile Header */}
-      <header className={`fixed top-0 left-0 w-full z-[100] md:hidden ${isHomePage ? (scrolled ? 'bg-white border-b border-[#dcd4c3]' : 'bg-transparent') : 'bg-white'}`} style={{ fontFamily: 'Playfair Display, serif', pointerEvents: 'auto', zIndex: 100 }}>
+      <header className={`fixed top-0 left-0 w-full z-[100] md:hidden ${
+        isMenuOpen
+          ? 'bg-white border-b border-[#dcd4c3]'
+          : isHomePage
+            ? (scrolled ? 'bg-white border-b border-[#dcd4c3]' : 'bg-transparent')
+            : 'bg-white'
+      }`} style={{ fontFamily: 'Playfair Display, serif', pointerEvents: 'auto', zIndex: 100 }}>
         <div className="flex items-center justify-between px-4 py-2 min-h-[48px]">
           {/* Hamburger Menu */}
           <button
             onClick={toggleMenu}
-            className={`p-2 ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
+            className={`p-2 ${
+              isMenuOpen
+                ? 'text-[#2f1c11]'
+                : isHomePage
+                  ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm')
+                  : 'text-[#2f1c11]'
+            }`}
             aria-label="Toggle menu"
           >
             <svg
@@ -65,7 +77,13 @@ export default function Navigation({ currentPage }: NavigationProps) {
           {/* Logo */}
           <Link 
             href="/" 
-            className={`text-2xl font-medium tracking-[0.35em] logo-mobile ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
+            className={`text-2xl font-medium tracking-[0.35em] logo-mobile ${
+              isMenuOpen
+                ? 'text-[#2f1c11]'
+                : isHomePage
+                  ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm')
+                  : 'text-[#2f1c11]'
+            }`}
             style={{ letterSpacing: '0.35em' }}
           >
             LEIA
@@ -75,7 +93,13 @@ export default function Navigation({ currentPage }: NavigationProps) {
           <div className="relative">
             <button 
               onClick={toggleCart}
-              className={`p-2 relative ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
+              className={`p-2 relative ${
+                isMenuOpen
+                  ? 'text-[#2f1c11]'
+                  : isHomePage
+                    ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm')
+                    : 'text-[#2f1c11]'
+              }`}
             >
               {cartItemsCount > 0 ? (
                 <div className="w-6 h-6 border border-current rounded-full flex items-center justify-center">
@@ -107,14 +131,14 @@ export default function Navigation({ currentPage }: NavigationProps) {
       {/* Side Drawer Overlay with medium opacity */}
       {isMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 md:hidden"
+          className="fixed left-0 right-0 top-12 bottom-0 bg-black/50 z-40 transition-opacity duration-300 md:hidden"
           onClick={toggleMenu}
         />
       )}
 
       {/* Side Drawer */}
       <div
-        className={`fixed top-0 left-0 bottom-0 w-64 bg-[#F8F5F2] z-50 shadow-2xl transform transition-transform duration-300 ease-in-out md:hidden ${
+        className={`fixed left-0 top-12 bottom-0 w-64 bg-[#F8F5F2] z-50 shadow-2xl transform transition-transform duration-300 ease-in-out md:hidden ${
           isMenuOpen ? 'translate-x-0 pointer-events-auto' : '-translate-x-full pointer-events-none'
         }`}
       >
