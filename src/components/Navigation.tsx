@@ -40,7 +40,7 @@ export default function Navigation({ currentPage }: NavigationProps) {
     <>
       {/* Mobile Header */}
       <header className={`fixed top-0 left-0 w-full z-50 md:hidden ${isHomePage ? (scrolled ? 'bg-white border-b border-[#dcd4c3]' : 'bg-transparent') : 'bg-white'}`}>
-        <div className="flex items-center justify-between px-4 py-2">
+        <div className="flex items-center justify-between px-4 py-2 min-h-[48px]">
           {/* Hamburger Menu */}
           <button
             onClick={toggleMenu}
@@ -48,7 +48,7 @@ export default function Navigation({ currentPage }: NavigationProps) {
             aria-label="Toggle menu"
           >
             <svg
-              className="w-7 h-7"
+              className="w-6 h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -65,8 +65,8 @@ export default function Navigation({ currentPage }: NavigationProps) {
           {/* Logo */}
           <Link 
             href="/" 
-            className={`text-3xl font-medium tracking-[0.4em] logo-mobile ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
-            style={{ letterSpacing: '0.4em' }}
+            className={`text-2xl font-medium tracking-[0.35em] logo-mobile ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
+            style={{ letterSpacing: '0.35em' }}
           >
             LEIA
           </Link>
@@ -78,14 +78,14 @@ export default function Navigation({ currentPage }: NavigationProps) {
               className={`p-2 relative ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
             >
               {cartItemsCount > 0 ? (
-                <div className="w-7 h-7 border border-current rounded-full flex items-center justify-center">
+                <div className="w-6 h-6 border border-current rounded-full flex items-center justify-center">
                   <span className="text-sm font-medium leading-none" style={{fontFamily: 'inherit'}}>
                     {cartItemsCount}
                   </span>
                 </div>
               ) : (
                 <svg
-                  className="w-7 h-7"
+                  className="w-6 h-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

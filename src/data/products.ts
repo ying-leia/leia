@@ -19,7 +19,7 @@ export const products = [
   {
     id: 'amea',
     name: 'Améa',
-    price: 225,
+    price: 2,
     featured: true,
     images: getProductImages('amea'),
     description: 'A lush, romantic bouquet featuring deep burgundy roses, soft blush peonies, and trailing eucalyptus for a timeless elegance.',

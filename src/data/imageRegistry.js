@@ -104,7 +104,7 @@ export const getAvailableVases = () => {
       id: 'forest',
       name: 'Forest Green',
       image: getVaseImage('forest'),
-      price: 35
+      price: 1
     },
     {
       id: 'ball', 
