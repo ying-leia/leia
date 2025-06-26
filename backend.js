@@ -179,8 +179,8 @@ app.post('/create-checkout-session', async (req, res) => {
       payment_method_types: ['card'],
       line_items,
       mode: 'payment',
-      success_url: 'http://localhost:3000/checkout?success=true',
-      cancel_url: 'http://localhost:3000/checkout?canceled=true',
+      success_url: 'https://leiaflora.com/checkout?success=true',
+      cancel_url: 'https://leiaflora.com/checkout?canceled=true',
       metadata: {
         cartItems: JSON.stringify(cartItems.map(item => ({ productId: item.id, quantity: item.quantity })))
       }
