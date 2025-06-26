@@ -50,7 +50,11 @@ db.serialize(() => {
 });
 
 const app = express();
-app.use(cors());
+
+// Allow only production and local dev origins
+app.use(cors({
+  origin: ['https://leiaflora.com', 'http://localhost:3000']
+}));
 
 // Stripe webhook for successful payment (must come before bodyParser.json for this route)
 app.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
