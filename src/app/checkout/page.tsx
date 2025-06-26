@@ -25,12 +25,19 @@ export default function Checkout() {
     getCartSubtotal, 
     getCartVasesTotal,
     formatPrice,
-    removeItem 
+    removeItem,
+    clearCart
   } = useCart();
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
   const searchParams = useSearchParams();
   const success = searchParams.get('success') === 'true';
+
+  React.useEffect(() => {
+    if (success) {
+      clearCart();
+    }
+  }, [success, clearCart]);
 
   const handleCheckout = async () => {
     setLoading(true);
