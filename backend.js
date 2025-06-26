@@ -58,48 +58,56 @@ app.use(cors({
 
 // Stripe webhook for successful payment (must come before bodyParser.json for this route)
 app.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
-  console.log('Stripe webhook endpoint hit');
-  const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
-  let event;
+  let eventId = 'unknown';
   try {
-    event = stripe.webhooks.constructEvent(req.body, req.headers['stripe-signature'], endpointSecret);
-  } catch (err) {
-    console.error('Webhook signature verification failed.', err.message);
-    return res.status(400).send(`Webhook Error: ${err.message}`);
-  }
-
-  if (event.type === 'checkout.session.completed') {
-    const session = event.data.object;
-    console.log('Session metadata:', session.metadata);
-    let cartItems = [];
+    const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+    const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+    let event;
     try {
-      cartItems = JSON.parse(session.metadata.cartItems);
-      console.log('Parsed cartItems:', cartItems);
-    } catch (e) {
-      console.error('Failed to parse cartItems from metadata', e);
+      event = stripe.webhooks.constructEvent(req.body, req.headers['stripe-signature'], endpointSecret);
+      eventId = event.id;
+    } catch (err) {
+      console.error('Webhook signature verification failed.', err.message);
+      return res.status(400).send(`Webhook Error: ${err.message}`);
     }
-    cartItems.forEach(item => {
-      db.get('SELECT * FROM inventory WHERE id = ?', [item.productId], (err, product) => {
-        if (err) {
-          console.error('DB error when selecting product:', err);
-        } else if (!product) {
-          console.error('Product not found in inventory:', item.productId);
-        } else if (product.stock >= item.quantity) {
-          db.run('UPDATE inventory SET stock = stock - ? WHERE id = ?', [item.quantity, item.productId], function(updateErr) {
-            if (updateErr) {
-              console.error('DB error when updating stock:', updateErr);
-            } else {
-              console.log(`Stock updated for product ${item.productId}: -${item.quantity}`);
-            }
-          });
-        } else {
-          console.warn(`Not enough stock for product ${item.productId}. Current stock: ${product.stock}, requested: ${item.quantity}`);
-        }
+    console.log('--- Stripe webhook handler called, event id:', eventId, '---');
+
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object;
+      console.log('Session metadata:', session.metadata);
+      let cartItems = [];
+      try {
+        cartItems = JSON.parse(session.metadata.cartItems);
+        console.log('Parsed cartItems:', cartItems);
+      } catch (e) {
+        console.error('Failed to parse cartItems from metadata', e);
+      }
+      cartItems.forEach(item => {
+        console.log('About to update inventory for', item.productId, 'event id:', eventId);
+        db.get('SELECT * FROM inventory WHERE id = ?', [item.productId], (err, product) => {
+          if (err) {
+            console.error('DB error when selecting product:', err);
+          } else if (!product) {
+            console.error('Product not found in inventory:', item.productId);
+          } else if (product.stock >= item.quantity) {
+            db.run('UPDATE inventory SET stock = stock - ? WHERE id = ?', [item.quantity, item.productId], function(updateErr) {
+              if (updateErr) {
+                console.error('DB error when updating stock:', updateErr);
+              } else {
+                console.log(`Stock updated for product ${item.productId}: -${item.quantity}, event id: ${eventId}`);
+              }
+            });
+          } else {
+            console.warn(`Not enough stock for product ${item.productId}. Current stock: ${product.stock}, requested: ${item.quantity}`);
+          }
+        });
       });
-    });
+    }
+    res.json({ received: true });
+  } catch (outerErr) {
+    console.error('Error in webhook handler:', outerErr);
+    res.status(500).send('Internal server error');
   }
-  res.json({ received: true });
 });
 
 // All other middleware/routes after webhook
