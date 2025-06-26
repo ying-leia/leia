@@ -191,12 +191,12 @@ export default function Navigation({ currentPage }: NavigationProps) {
       <header className={`hidden md:block fixed top-0 left-0 w-full z-[100]`} style={{ fontFamily: 'Playfair Display, serif', pointerEvents: 'auto', zIndex: 100 }}>
         <div className={`flex items-center justify-between px-10 py-6 uppercase tracking-wide ${isHomePage ? (scrolled ? 'bg-white border-b border-[#dcd4c3]' : 'bg-transparent') : 'bg-white border-b border-[#dcd4c3]'}`}>
           <nav className="flex gap-8 text-sm items-center flex-1 justify-start">
-            <Link 
+            <a 
               href="/shop" 
               className={`hover:underline ${currentPage === 'shop' ? 'font-medium' : ''} ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
             >
               Shop
-            </Link>
+            </a>
             <Link 
               href="/our-story" 
               className={`hover:underline ${currentPage === 'about' ? 'font-medium' : ''} ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
