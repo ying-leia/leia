@@ -71,7 +71,11 @@ export default function Cart() {
 
       <Navigation />
 
-      <div className="px-6 md:px-10 py-12 pt-20 md:pt-12">
+      {/* Cart Hero Section */}
+      <section className="py-24 px-6 md:px-10 text-center">
+        <h1 className="text-2xl md:text-3xl font-extralight mb-4">Shopping Cart</h1>
+      </section>
+      <div className="px-6 md:px-10 pb-12">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-2xl md:text-3xl font-extralight mb-8 flex items-center gap-3">Shopping Cart</h1>
           
