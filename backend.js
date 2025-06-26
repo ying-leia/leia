@@ -75,13 +75,26 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
     let cartItems = [];
     try {
       cartItems = JSON.parse(session.metadata.cartItems);
+      console.log('Parsed cartItems:', cartItems);
     } catch (e) {
-      console.error('Failed to parse cartItems from metadata');
+      console.error('Failed to parse cartItems from metadata', e);
     }
     cartItems.forEach(item => {
       db.get('SELECT * FROM inventory WHERE id = ?', [item.productId], (err, product) => {
-        if (!err && product && product.stock >= item.quantity) {
-          db.run('UPDATE inventory SET stock = stock - ? WHERE id = ?', [item.quantity, item.productId]);
+        if (err) {
+          console.error('DB error when selecting product:', err);
+        } else if (!product) {
+          console.error('Product not found in inventory:', item.productId);
+        } else if (product.stock >= item.quantity) {
+          db.run('UPDATE inventory SET stock = stock - ? WHERE id = ?', [item.quantity, item.productId], function(updateErr) {
+            if (updateErr) {
+              console.error('DB error when updating stock:', updateErr);
+            } else {
+              console.log(`Stock updated for product ${item.productId}: -${item.quantity}`);
+            }
+          });
+        } else {
+          console.warn(`Not enough stock for product ${item.productId}. Current stock: ${product.stock}, requested: ${item.quantity}`);
         }
       });
     });
