@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useCart } from '../contexts/CartContext';
 import { usePathname } from 'next/navigation';
@@ -15,6 +15,16 @@ export default function Navigation({ currentPage }: NavigationProps) {
   const { getCartItemsCount } = useCart();
   const pathname = usePathname();
   const isHomePage = pathname === '/';
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    if (!isHomePage) return;
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isHomePage]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -29,12 +39,12 @@ export default function Navigation({ currentPage }: NavigationProps) {
   return (
     <>
       {/* Mobile Header */}
-      <header className={`fixed top-0 left-0 w-full z-50 md:hidden ${isHomePage ? 'bg-transparent' : 'bg-white'}`}>
+      <header className={`fixed top-0 left-0 w-full z-50 md:hidden ${isHomePage ? (scrolled ? 'bg-white border-b border-[#dcd4c3]' : 'bg-transparent') : 'bg-white'}`}>
         <div className="flex items-center justify-between px-4 py-2">
           {/* Hamburger Menu */}
           <button
             onClick={toggleMenu}
-            className={`p-2 ${isHomePage ? 'text-white drop-shadow-sm' : 'text-[#2f1c11]'}`}
+            className={`p-2 ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
             aria-label="Toggle menu"
           >
             <svg
@@ -55,16 +65,17 @@ export default function Navigation({ currentPage }: NavigationProps) {
           {/* Logo */}
           <Link 
             href="/" 
-            className={`text-3xl font-medium tracking-wide ${isHomePage ? 'text-white drop-shadow-sm' : 'text-[#2f1c11]'}`}
+            className={`text-3xl font-medium tracking-[0.4em] logo-mobile ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
+            style={{ letterSpacing: '0.4em' }}
           >
-            leia
+            LEIA
           </Link>
 
           {/* Cart Icon */}
           <div className="relative">
             <button 
               onClick={toggleCart}
-              className={`p-2 relative ${isHomePage ? 'text-white drop-shadow-sm' : 'text-[#2f1c11]'}`}
+              className={`p-2 relative ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
             >
               {cartItemsCount > 0 ? (
                 <div className="w-7 h-7 border border-current rounded-full flex items-center justify-center">
@@ -108,13 +119,6 @@ export default function Navigation({ currentPage }: NavigationProps) {
         }`}
       >
         <div className="flex flex-col h-full">
-          <div className="flex items-center justify-between px-4 py-2 border-b border-[#dcd4c3]">
-            <Link href="/" className="text-3xl font-medium tracking-wide text-[#2f1c11]">
-              leia
-            </Link>
-            <div></div>
-          </div>
-          
           <nav className="flex-1 px-6 py-8">
             <ul className="space-y-6 text-[#2f1c11] uppercase tracking-wide">
               <li>
@@ -184,52 +188,57 @@ export default function Navigation({ currentPage }: NavigationProps) {
       </div>
 
       {/* Desktop Header */}
-      <header className={`hidden md:block ${isHomePage ? 'absolute' : 'relative'} top-0 left-0 w-full z-50`}>
-        <div className={`flex justify-between items-center px-10 py-6 uppercase tracking-wide ${isHomePage ? 'bg-transparent' : 'bg-white border-b border-[#dcd4c3]'}`}>
-          <Link 
-            href="/" 
-            className={`text-3xl font-medium tracking-wide ${isHomePage ? 'text-white drop-shadow-sm' : 'text-[#2f1c11]'}`}
-          >
-            leia
-          </Link>
-          <nav className="flex gap-8 text-sm items-center">
+      <header className={`hidden md:block fixed top-0 left-0 w-full z-50`}>
+        <div className={`flex items-center justify-between px-10 py-6 uppercase tracking-wide ${isHomePage ? (scrolled ? 'bg-white border-b border-[#dcd4c3]' : 'bg-transparent') : 'bg-white border-b border-[#dcd4c3]'}`}>
+          <nav className="flex gap-8 text-sm items-center flex-1 justify-start">
             <Link 
               href="/shop" 
-              className={`hover:underline ${currentPage === 'shop' ? 'font-medium' : ''} ${isHomePage ? 'text-white drop-shadow-sm' : 'text-[#2f1c11]'}`}
+              className={`hover:underline ${currentPage === 'shop' ? 'font-medium' : ''} ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
             >
               Shop
             </Link>
             <Link 
               href="/our-story" 
-              className={`hover:underline ${currentPage === 'about' ? 'font-medium' : ''} ${isHomePage ? 'text-white drop-shadow-sm' : 'text-[#2f1c11]'}`}
+              className={`hover:underline ${currentPage === 'about' ? 'font-medium' : ''} ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
             >
               About
             </Link>
             <Link 
               href="/services" 
-              className={`hover:underline ${currentPage === 'services' ? 'font-medium' : ''} ${isHomePage ? 'text-white drop-shadow-sm' : 'text-[#2f1c11]'}`}
+              className={`hover:underline ${currentPage === 'services' ? 'font-medium' : ''} ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
             >
               Services
             </Link>
+          </nav>
+          <div className="flex-0 flex justify-center w-full absolute left-1/2 -translate-x-1/2 pointer-events-none">
+            <Link 
+              href="/" 
+              className={`text-3xl font-medium tracking-[0.4em] logo-desktop ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'} pointer-events-auto`}
+              style={{ letterSpacing: '0.4em' }}
+            >
+              LEIA
+            </Link>
+          </div>
+          <nav className="flex gap-8 text-sm items-center flex-1 justify-end">
             <Link 
               href="/contact" 
-              className={`hover:underline ${currentPage === 'contact' ? 'font-medium' : ''} ${isHomePage ? 'text-white drop-shadow-sm' : 'text-[#2f1c11]'}`}
+              className={`hover:underline ${currentPage === 'contact' ? 'font-medium' : ''} ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
             >
               Contact
             </Link>
             <Link 
               href="/sign-in" 
-              className={`hover:underline ${isHomePage ? 'text-white drop-shadow-sm' : 'text-[#2f1c11]'}`}
+              className={`hover:underline ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
             >
               Account
             </Link>
             <Link 
               href="/cart" 
-              className={`hover:underline flex items-center gap-1 ${isHomePage ? 'text-white drop-shadow-sm' : 'text-[#2f1c11]'}`}
+              className={`hover:underline flex items-center gap-1 ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
             >
               Cart
               {cartItemsCount > 0 && (
-                <span className={`text-sm font-medium rounded-full w-5 h-5 flex items-center justify-center leading-none ${isHomePage ? 'bg-white text-[#2f1c11]' : 'bg-[#5F493B] text-white'}`} style={{fontFamily: 'inherit'}}>
+                <span className={`text-sm font-medium rounded-full w-5 h-5 flex items-center justify-center leading-none ${isHomePage ? (scrolled ? 'bg-[#5F493B] text-white' : 'bg-white text-[#2f1c11]') : 'bg-[#5F493B] text-white'}`} style={{fontFamily: 'inherit'}}>
                   {cartItemsCount}
                 </span>
               )}
@@ -239,4 +248,4 @@ export default function Navigation({ currentPage }: NavigationProps) {
       </header>
     </>
   );
-} 
+}
