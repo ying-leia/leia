@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useCart } from '../../contexts/CartContext';
 import Navigation from '../../components/Navigation';
 import { loadStripe } from '@stripe/stripe-js';
+import { useSearchParams } from 'next/navigation';
 
 interface CartItem {
   cartId: string;
@@ -28,6 +29,8 @@ export default function Checkout() {
   } = useCart();
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const success = searchParams.get('success') === 'true';
 
   const handleCheckout = async () => {
     setLoading(true);
@@ -49,6 +52,19 @@ export default function Checkout() {
       setLoading(false);
     }
   };
+
+  if (success) {
+    return (
+      <div className="min-h-screen bg-[#F8F5F2] flex flex-col items-center justify-center">
+        <Navigation currentPage="checkout" />
+        <div className="max-w-md mx-auto bg-white border border-[#dcd4c3] rounded-lg p-8 mt-20 text-center shadow">
+          <h1 className="text-2xl md:text-3xl font-extralight text-[#2f1c11] mb-4">Thank you for your purchase!</h1>
+          <p className="text-[#5f493b] mb-6">Your order has been received and is being processed. You will receive a confirmation email shortly.</p>
+          <Link href="/shop" className="inline-block bg-[#5F493B] text-white px-6 py-3 rounded hover:bg-[#2f1c11] transition-colors duration-200">Continue Shopping</Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#F8F5F2]">
