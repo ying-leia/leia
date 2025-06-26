@@ -197,18 +197,18 @@ export default function Navigation({ currentPage }: NavigationProps) {
             >
               Shop
             </a>
-            <Link 
+            <a 
               href="/our-story" 
               className={`hover:underline ${currentPage === 'about' ? 'font-medium' : ''} ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
             >
               About
-            </Link>
-            <Link 
+            </a>
+            <a 
               href="/services" 
               className={`hover:underline ${currentPage === 'services' ? 'font-medium' : ''} ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
             >
               Services
-            </Link>
+            </a>
           </nav>
           <div className="flex-0 flex justify-center w-full absolute left-1/2 -translate-x-1/2 pointer-events-none">
             <Link 
@@ -220,19 +220,19 @@ export default function Navigation({ currentPage }: NavigationProps) {
             </Link>
           </div>
           <nav className="flex gap-8 text-sm items-center flex-1 justify-end">
-            <Link 
+            <a 
               href="/contact" 
               className={`hover:underline ${currentPage === 'contact' ? 'font-medium' : ''} ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
             >
               Contact
-            </Link>
-            <Link 
+            </a>
+            <a 
               href="/sign-in" 
               className={`hover:underline ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
             >
               Account
-            </Link>
-            <Link 
+            </a>
+            <a 
               href="/cart" 
               className={`hover:underline flex items-center gap-1 ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
             >
@@ -242,7 +242,7 @@ export default function Navigation({ currentPage }: NavigationProps) {
                   {cartItemsCount}
                 </span>
               )}
-            </Link>
+            </a>
           </nav>
         </div>
       </header>
