@@ -77,7 +77,7 @@ export default function Navigation({ currentPage }: NavigationProps) {
           {/* Logo */}
           <Link 
             href="/" 
-            className={`text-2xl font-medium tracking-[0.35em] logo-mobile ${
+            className={`text-2xl font-medium tracking-[0.35em] logo-mobile pointer-events-auto ${
               isMenuOpen
                 ? 'text-[#2f1c11]'
                 : isHomePage
@@ -234,10 +234,10 @@ export default function Navigation({ currentPage }: NavigationProps) {
               Services
             </a>
           </nav>
-          <div className="flex-0 flex justify-center w-full absolute left-1/2 -translate-x-1/2 pointer-events-none">
+          <div className="flex-0 flex justify-center w-full absolute left-1/2 -translate-x-1/2">
             <Link 
               href="/" 
-              className={`text-3xl font-medium tracking-[0.4em] logo-desktop ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'} pointer-events-auto`}
+              className={`text-3xl font-medium tracking-[0.4em] logo-desktop pointer-events-auto ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
               style={{ letterSpacing: '0.4em' }}
             >
               LEIA
