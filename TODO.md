@@ -38,12 +38,24 @@ Make sure the number in the count badge is ALWAYS center aligned
 
 9. (DONE) Add a linkage between the "Add to cart" button with backend data that records how much stock there is left for each item, and automatically populate a "Pre-Order" box to appear whenever an item is at zero stock (sold out). 
 
-10. Implement Stripe payment + automatically decrement stock when a sale completes + Add a preorderAvailable boolean to manually control preorder status per item.
+10. Implement Stripe payment 
+- Automatically decrement stock when a sale completes 
+- Inventory: Seraphine is showing Out of Stock but https://leia-less.onrender.com/inventory shows it has 10 items 
+- When a stock runs out, make the add to cart button become a Preorder button where customers can still be lead to checkout but have a disclaimer that 
 
 11. Implement Stripe Elements later on. Make Checkout page more seamless with Stripe already in it along with checkout summary
 
-12. Ensure confirmation email gets sent upon successful orders 
+12. Thank you for puchase page: 
+- (DONE) Ensure font and typography is consistent with the rest of the site 
+- Ensure that LEIA button is clickable and brings me back to landing page
+- confirmation email gets sent upon successful orders 
 
+13. (DONE) In the About page, make sure that when leia is mentioned, its "Leia" instead of "leia"
 
+14. In each individual product from the shop page, there is an awkward gap at the top of the screen on desktop and on mobile
 
+15. (DONE) In the mobile view, make sure the hamburger icon also has a link for Shop which leads to shop page 
 
+16. When something is added to cart, the pop up that shows the item is added to cart is cut off and blocked by the top header
+
+17. On the landing page, the spacing between each section is too far apart
