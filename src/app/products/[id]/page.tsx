@@ -148,7 +148,7 @@ export default function ProductDetail({ params }: ProductDetailProps) {
       <Navigation currentPage="shop" />
 
       {/* Breadcrumb */}
-      <div className="px-6 md:px-10 mb-6 mt-28 md:mt-32">
+      <div className="px-6 md:px-10 mb-6 mt-16 md:mt-20 pt-2 bg-[#F8F5F2]">
         <nav className="text-sm text-[#5f493b]">
           <Link href="/" className="hover:underline">Home</Link>
           <span className="mx-2">/</span>
