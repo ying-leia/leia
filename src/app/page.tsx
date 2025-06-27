@@ -99,7 +99,7 @@ export default function Home() {
 
       {/* Featured Products Section */}
       <section className="py-24 px-6 md:px-10 text-center">
-        <h2 className="text-4xl md:text-5xl font-light mb-4">Featured Collection</h2>
+        <h2 className="text-4xl font-extralight mb-4">Featured Collection</h2>
         <p className="text-[#5f493b] mb-12 max-w-2xl mx-auto leading-relaxed">
           Discover our most beloved eternal flower arrangements, each crafted to bring lasting beauty to your space.
         </p>
@@ -127,7 +127,7 @@ export default function Home() {
 
       {/* Occasions Carousel Section */}
       <section id="occasions" className="py-24 px-0 text-center">
-        <h2 className="text-3xl tracking-wide uppercase mb-8">Perfect for Every Occasion</h2>
+        <h2 className="text-4xl font-extralight mb-4">Perfect for Every Occasion</h2>
         <p className="text-[#5f493b] mb-12 max-w-2xl mx-auto leading-relaxed px-6">
           From life&apos;s grandest celebrations to its quietest moments, our eternal arrangements 
           mark occasions with lasting beauty and meaning.
@@ -202,7 +202,7 @@ export default function Home() {
 
       {/* Chic Socials Section */}
       <section id="contact" className="py-20 px-6 md:px-20 text-center">
-        <h3 className="text-2xl font-light uppercase mb-4 cursor-pointer" onClick={() => window.location.href = '/contact'}>Stay Connected</h3>
+        <h3 className="text-4xl font-extralight mb-4 cursor-pointer" onClick={() => window.location.href = '/contact'}>Stay Connected</h3>
         <p className="text-[#5f493b] mb-10">Follow us for floral stories, behind-the-scenes moments, and exclusive previews.</p>
         <div className="flex justify-center gap-8 text-sm uppercase tracking-wide">
           <Link href="#" className="hover:underline">Instagram</Link>
