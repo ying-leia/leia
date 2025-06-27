@@ -39,7 +39,7 @@ export default function Navigation({ currentPage }: NavigationProps) {
   return (
     <>
       {/* Mobile Header */}
-      <header className={`fixed top-0 left-0 w-full z-[100] md:hidden ${
+      <header className={`fixed top-0 left-0 w-full z-[200] md:hidden ${
         isMenuOpen
           ? 'bg-white border-b border-[#dcd4c3]'
           : isHomePage
@@ -77,7 +77,7 @@ export default function Navigation({ currentPage }: NavigationProps) {
           {/* Logo */}
           <Link 
             href="/" 
-            className={`text-2xl font-medium tracking-[0.35em] logo-mobile pointer-events-auto ${
+            className={`text-2xl font-medium tracking-[0.35em] logo-mobile ${
               isMenuOpen
                 ? 'text-[#2f1c11]'
                 : isHomePage
@@ -212,7 +212,7 @@ export default function Navigation({ currentPage }: NavigationProps) {
       </div>
 
       {/* Desktop Header */}
-      <header className={`hidden md:block fixed top-0 left-0 w-full z-[100]`} style={{ fontFamily: 'Playfair Display, serif', pointerEvents: 'auto', zIndex: 100 }}>
+      <header className={`hidden md:block fixed top-0 left-0 w-full z-[200]`} style={{ fontFamily: 'Playfair Display, serif', pointerEvents: 'auto', zIndex: 200 }}>
         <div className={`flex items-center justify-between px-10 py-6 uppercase tracking-wide ${isHomePage ? (scrolled ? 'bg-white border-b border-[#dcd4c3]' : 'bg-transparent') : 'bg-white border-b border-[#dcd4c3]'}`}>
           <nav className="flex gap-8 text-sm items-center flex-1 justify-start">
             <a 
@@ -234,10 +234,10 @@ export default function Navigation({ currentPage }: NavigationProps) {
               Services
             </a>
           </nav>
-          <div className="flex-0 flex justify-center w-full absolute left-1/2 -translate-x-1/2">
+          <div className="flex-0 flex justify-center w-full absolute left-1/2 -translate-x-1/2 pointer-events-none">
             <Link 
               href="/" 
-              className={`text-3xl font-medium tracking-[0.4em] logo-desktop pointer-events-auto ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'}`}
+              className={`text-3xl font-medium tracking-[0.4em] logo-desktop ${isHomePage ? (scrolled ? 'text-[#2f1c11]' : 'text-white drop-shadow-sm') : 'text-[#2f1c11]'} pointer-events-auto`}
               style={{ letterSpacing: '0.4em' }}
             >
               LEIA

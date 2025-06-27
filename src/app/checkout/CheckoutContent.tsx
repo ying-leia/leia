@@ -66,7 +66,7 @@ export default function Checkout() {
         <Navigation currentPage="checkout" />
         <div
           className="max-w-md mx-auto bg-white border border-[#dcd4c3] rounded-lg p-8 text-center shadow mt-32"
-          style={{ fontFamily: 'Playfair Display, serif', border: '4px dashed red', background: 'rgba(255,0,0,0.05)' }}
+          style={{ fontFamily: 'Playfair Display, serif' }}
         >
           <h1 className="text-2xl md:text-3xl font-extralight text-[#2f1c11] mb-4">
             Thank you for your purchase!
