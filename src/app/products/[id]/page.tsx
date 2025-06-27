@@ -52,6 +52,7 @@ export default function ProductDetail({ params }: ProductDetailProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [orderStatus, setOrderStatus] = useState<string | null>(null);
+  const [addedToCart, setAddedToCart] = useState(false);
   
   const { addItem, formatPrice } = useCart();
   const isAdmin = false; // Set to false for production so admin controls are hidden
@@ -95,6 +96,10 @@ export default function ProductDetail({ params }: ProductDetailProps) {
           if (data.type === 'purchase') {
             addItem(product, selectedVase, 1);
             setOrderStatus('added');
+            if ((product.stock ?? 0) > 0) {
+              setAddedToCart(true);
+              setTimeout(() => setAddedToCart(false), 3000);
+            }
           } else if (data.type === 'preorder') {
             setOrderStatus('preordered');
           }
@@ -306,12 +311,6 @@ export default function ProductDetail({ params }: ProductDetailProps) {
 
             {/* Add to Cart / Preorder Button */}
             <div className="mt-6">
-              {orderStatus === 'added' && (
-                <div className="text-green-700 mb-2">Added to cart!</div>
-              )}
-              {orderStatus === 'preordered' && (
-                <div className="text-blue-700 mb-2">Pre-order placed!</div>
-              )}
               {orderStatus === 'error' && (
                 <div className="text-red-700 mb-2">Could not place order. Please try again.</div>
               )}
@@ -329,7 +328,7 @@ export default function ProductDetail({ params }: ProductDetailProps) {
                 {(product.stock ?? 0) === 0 && (product.preorderAvailable ?? false)
                   ? 'Pre-order'
                   : (product.stock ?? 0) > 0
-                  ? 'Add to Cart'
+                  ? (addedToCart ? 'Added to Cart!' : 'Add to Cart')
                   : 'Out of Stock'}
               </button>
             </div>

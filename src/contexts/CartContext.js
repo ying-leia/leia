@@ -1,6 +1,5 @@
 'use client';
 import React, { createContext, useContext, useReducer, useEffect, useState } from 'react';
-import Toast from '../components/Toast';
 
 const CartContext = createContext();
 
@@ -64,8 +63,6 @@ const cartReducer = (state, action) => {
 
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, { items: [] });
-  const [toastVisible, setToastVisible] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
 
   // Load cart from localStorage on mount
   useEffect(() => {
@@ -85,15 +82,6 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem('leia-cart', JSON.stringify(state.items));
   }, [state.items]);
 
-  const showToast = (message) => {
-    setToastMessage(message);
-    setToastVisible(true);
-  };
-
-  const hideToast = () => {
-    setToastVisible(false);
-  };
-
   const addItem = (product, selectedVase = null, quantity = 1) => {
     dispatch({
       type: 'ADD_ITEM',
@@ -107,10 +95,6 @@ export const CartProvider = ({ children }) => {
         product // Keep reference to full product for easy access
       }
     });
-
-    // Show toast notification
-    const vaseText = selectedVase ? ` with ${selectedVase.name}` : '';
-    showToast(`${product.name}${vaseText} added to cart`);
   };
 
   const removeItem = (cartId) => {
@@ -175,12 +159,6 @@ export const CartProvider = ({ children }) => {
   return (
     <CartContext.Provider value={value}>
       {children}
-      <Toast 
-        message={toastMessage}
-        isVisible={toastVisible}
-        onClose={hideToast}
-        type="success"
-      />
     </CartContext.Provider>
   );
 };

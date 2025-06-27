@@ -98,7 +98,7 @@ export default function Home() {
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-24 px-6 md:px-10 text-center">
+      <section className="py-12 px-6 md:px-10 text-center">
         <h2 className="text-4xl font-extralight mb-4">Featured Collection</h2>
         <p className="text-[#5f493b] mb-12 max-w-2xl mx-auto leading-relaxed">
           Discover our most beloved eternal flower arrangements, each crafted to bring lasting beauty to your space.
@@ -126,7 +126,7 @@ export default function Home() {
       </section>
 
       {/* Occasions Carousel Section */}
-      <section id="occasions" className="py-24 px-0 text-center">
+      <section id="occasions" className="py-12 px-0 text-center">
         <h2 className="text-4xl font-extralight mb-4">Perfect for Every Occasion</h2>
         <p className="text-[#5f493b] mb-12 max-w-2xl mx-auto leading-relaxed px-6">
           From life&apos;s grandest celebrations to its quietest moments, our eternal arrangements 
@@ -174,7 +174,7 @@ export default function Home() {
       </section>
 
       {/* Footer Visual Section: 2/3 Image + 1/3 Text */}
-      <section id="about" className="py-20 px-0 grid grid-cols-1 md:grid-cols-3 items-center">
+      <section id="about" className="py-10 px-0 grid grid-cols-1 md:grid-cols-3 items-center">
         <div className="md:col-span-2 h-full w-full relative">
           <Image
             src="/assets/products/liora/sunset-side.jpg"
@@ -185,7 +185,8 @@ export default function Home() {
           />
         </div>
         <div className="bg-[#F8F5F2] px-8 py-16 text-left">
-          <h5 className="uppercase text-sm text-[#5f493b] mb-4 tracking-wide">For the poetic</h5>
+          <h3 className="text-4xl font-extralight mb-4 text-left md:text-left">Our Story</h3>
+          <h5 className="italic text-sm text-[#5f493b] mb-4 tracking-wide">Founder's journey</h5>
           <p className="text-base leading-relaxed mb-6">
             We design with feeling. Flowers are fleeting by nature — but when preserved with
             intention, they evoke nostalgia, softness, and meaning across time. Each arrangement
@@ -201,7 +202,7 @@ export default function Home() {
       </section>
 
       {/* Chic Socials Section */}
-      <section id="contact" className="py-20 px-6 md:px-20 text-center">
+      <section id="contact" className="py-10 px-6 md:px-20 text-center">
         <h3 className="text-4xl font-extralight mb-4 cursor-pointer" onClick={() => window.location.href = '/contact'}>Stay Connected</h3>
         <p className="text-[#5f493b] mb-10">Follow us for floral stories, behind-the-scenes moments, and exclusive previews.</p>
         <div className="flex justify-center gap-8 text-sm uppercase tracking-wide">

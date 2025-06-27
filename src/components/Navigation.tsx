@@ -46,7 +46,7 @@ export default function Navigation({ currentPage }: NavigationProps) {
             ? (scrolled ? 'bg-white border-b border-[#dcd4c3]' : 'bg-transparent')
             : 'bg-white'
       }`} style={{ fontFamily: 'Playfair Display, serif', pointerEvents: 'auto', zIndex: 100 }}>
-        <div className="flex items-center justify-between px-4 py-2 min-h-[48px]">
+        <div className="flex items-center justify-between px-4 py-1 min-h-[40px]">
           {/* Hamburger Menu */}
           <button
             onClick={toggleMenu}
