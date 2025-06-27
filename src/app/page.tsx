@@ -186,7 +186,7 @@ export default function Home() {
         </div>
         <div className="bg-[#F8F5F2] px-8 py-16 text-left">
           <h3 className="text-4xl font-extralight mb-4 text-left md:text-left">Our Story</h3>
-          <h5 className="italic text-sm text-[#5f493b] mb-4 tracking-wide">Founder's journey</h5>
+          <h5 className="italic text-sm text-[#5f493b] mb-4 tracking-wide">Founder&apos;s journey</h5>
           <p className="text-base leading-relaxed mb-6">
             We design with feeling. Flowers are fleeting by nature — but when preserved with
             intention, they evoke nostalgia, softness, and meaning across time. Each arrangement
