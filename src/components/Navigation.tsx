@@ -123,7 +123,7 @@ export default function Navigation({ currentPage }: NavigationProps) {
                 </svg>
               )}
             </button>
-            <CartDropdown isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+            <CartDropdown />
           </div>
         </div>
       </header>

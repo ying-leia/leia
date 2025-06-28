@@ -1,8 +1,3 @@
-interface CartDropdownProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-export default function CartDropdown({ isOpen: _isOpen, onClose: _onClose }: CartDropdownProps) {
+export default function CartDropdown() {
   return <div>Cart functionality is now handled by Shopify integration.</div>;
 } 
