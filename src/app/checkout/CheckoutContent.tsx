@@ -31,7 +31,7 @@ export default function Checkout() {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
   const searchParams = useSearchParams();
-  const success = searchParams.get('success') === 'true';
+  const success = searchParams?.get('success') === 'true';
 
   React.useEffect(() => {
     if (success) {
