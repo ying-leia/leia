@@ -1,3 +1,5 @@
+// Product images are now managed by Shopify. Retain only generic image helpers if needed.
+
 /**
  * Image management utilities for products
  * Allows specifying folder paths and automatically generates image arrays

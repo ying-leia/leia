@@ -1,3 +1,5 @@
+// Products are now managed by Shopify. This file is deprecated.
+
 import { getProductImages, getAvailableVases } from './imageRegistry';
 
 export const products = [

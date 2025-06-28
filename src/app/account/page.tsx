@@ -1,36 +1,19 @@
-import Link from 'next/link';
+import Navigation from '../../components/Navigation';
 
-// Placeholder order data
-const orders = [
-  {
-    id: 'order_1',
-    date: '2024-06-01',
-    total: '$120.00',
-  },
-  {
-    id: 'order_2',
-    date: '2024-05-15',
-    total: '$80.00',
-  },
-];
-
-export default function AccountOrderHistoryPage() {
+export default function AccountPage() {
   return (
-    <div className="max-w-2xl mx-auto py-8 px-4">
-      <h1 className="text-2xl font-bold mb-6">Order History</h1>
-      <ul className="space-y-4">
-        {orders.map((order) => (
-          <li key={order.id} className="border rounded p-4 flex justify-between items-center">
-            <div>
-              <div className="font-medium">Order placed: {order.date}</div>
-              <div className="text-gray-500">Total: {order.total}</div>
-            </div>
-            <Link href={`/account/orders/${order.id}`} className="text-blue-600 hover:underline">
-              View Details
-            </Link>
-          </li>
-        ))}
-      </ul>
+    <div className="min-h-screen bg-[#F8F5F2] text-[#2f1c11]">
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap');
+        body { font-family: 'Playfair Display', serif; }
+      `}</style>
+      <Navigation />
+      <div className="max-w-md mx-auto pt-24 pb-12 px-4">
+        <h1 className="text-2xl md:text-3xl font-extralight mb-4 text-center">Account</h1>
+        <div className="text-center text-lg mt-8">
+          Account management is now handled securely via our Shopify store.
+        </div>
+      </div>
     </div>
   );
 } 

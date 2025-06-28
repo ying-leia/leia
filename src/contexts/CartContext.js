@@ -1,3 +1,5 @@
+// Cart context is deprecated. Cart functionality is now handled by Shopify integration.
+
 'use client';
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 

@@ -1,3 +1,5 @@
+// Image registry is now managed by Shopify. This file is deprecated.
+
 /**
  * Image Registry - Maps all actual images in the assets folders
  * This ensures we only reference images that actually exist

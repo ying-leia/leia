@@ -1,3 +1,5 @@
+// Product management is now handled by Shopify.
+
 /**
  * Utility to help add new products with automatic image detection
  * Use this when adding new products to your catalog
