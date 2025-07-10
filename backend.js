@@ -1,9 +1,12 @@
+require('@shopify/shopify-api/adapters/node');
 require('dotenv').config();
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const cors = require('cors');
+const { shopifyApi, LATEST_API_VERSION } = require('@shopify/shopify-api');
+const axios = require('axios');
 
 const DB_FILE = process.env.DB_FILE || 'inventory.db';
 const PORT = process.env.PORT || 4000;
@@ -48,6 +51,15 @@ const app = express();
 app.use(cors({
   origin: ['https://leiaflora.com', 'http://localhost:3000']
 }));
+
+const shopify = shopifyApi({
+  apiKey: process.env.SHOPIFY_API_KEY,
+  apiSecretKey: process.env.SHOPIFY_API_SECRET,
+  adminApiAccessToken: process.env.SHOPIFY_ACCESS_TOKEN,
+  apiVersion: LATEST_API_VERSION,
+  isCustomStoreApp: true,
+  hostName: process.env.SHOPIFY_SHOP_DOMAIN,
+});
 
 // Stripe webhook for successful payment (must come before bodyParser.json for this route)
 app.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
@@ -207,6 +219,79 @@ app.post('/create-checkout-session', async (req, res) => {
   } catch (err) {
     console.error('Stripe error:', err);
     res.status(500).json({ error: 'Stripe session creation failed' });
+  }
+});
+
+// Test endpoint: Fetch products from Shopify
+app.get('/shopify/products', async (req, res) => {
+  try {
+    const response = await axios.get(
+      `https://${process.env.SHOPIFY_SHOP_DOMAIN}/admin/api/2024-04/products.json`,
+      {
+        headers: {
+          'X-Shopify-Access-Token': process.env.SHOPIFY_ACCESS_TOKEN,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    res.json(response.data.products);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Endpoint: Fetch a single product from Shopify by ID
+app.get('/shopify/products/:id', async (req, res) => {
+  try {
+    // Fetch the product (with basic fields)
+    const response = await axios.get(
+      `https://${process.env.SHOPIFY_SHOP_DOMAIN}/admin/api/2024-04/products/${req.params.id}.json?fields=id,title,body_html,product_type,tags,images,variants`,
+      {
+        headers: {
+          'X-Shopify-Access-Token': process.env.SHOPIFY_ACCESS_TOKEN,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    const product = response.data.product;
+
+    // Fetch metafields for this product
+    const metafieldsRes = await axios.get(
+      `https://${process.env.SHOPIFY_SHOP_DOMAIN}/admin/api/2024-04/products/${req.params.id}/metafields.json`,
+      {
+        headers: {
+          'X-Shopify-Access-Token': process.env.SHOPIFY_ACCESS_TOKEN,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    const metafields = metafieldsRes.data.metafields;
+    const careMetafield = metafields.find(
+      (mf) => mf.namespace === 'custom' && mf.key === 'product_care'
+    );
+    product.care = careMetafield ? careMetafield.value : '';
+
+    // Try to fetch media, but don't fail if it errors
+    try {
+      const mediaRes = await axios.get(
+        `https://${process.env.SHOPIFY_SHOP_DOMAIN}/admin/api/2024-04/products/${req.params.id}/media.json`,
+        {
+          headers: {
+            'X-Shopify-Access-Token': process.env.SHOPIFY_ACCESS_TOKEN,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      product.media = mediaRes.data.media;
+    } catch (mediaError) {
+      console.error('Shopify media API error:', mediaError?.response?.data || mediaError.message || mediaError);
+      product.media = [];
+    }
+
+    res.json(product);
+  } catch (error) {
+    console.error('Shopify API error:', error?.response?.data || error.message || error);
+    res.status(404).json({ error: 'Product not found' });
   }
 });
 

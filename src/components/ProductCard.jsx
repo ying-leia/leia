@@ -46,6 +46,7 @@ const ProductCard = ({ product, className = '' }) => {
             fill
             sizes="256px"
             className="object-cover hover:scale-105 transition-transform duration-300"
+            priority
           />
           
           {/* Image Navigation - Only show if multiple images */}

@@ -36,22 +36,32 @@ export default function Shop() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/inventory`)
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/shopify/products`)
       .then(res => res.json())
-      .then((inventory: { id: string; stock: number; preorderAvailable: boolean }[]) => {
-        const merged = localProducts.map(p => {
-          const inv = inventory.find((i) => i.id === p.id);
-          return {
-            ...p,
-            stock: inv ? inv.stock : 0,
-            preorderAvailable: inv ? !!inv.preorderAvailable : false,
-          };
-        });
-        setProducts(merged);
+      .then((shopifyProducts: any[]) => {
+        // Map Shopify product data to local Product interface
+        const mappedProducts = shopifyProducts.map((p: any) => ({
+          id: p.id.toString(),
+          name: p.title,
+          price: p.variants && p.variants[0] ? parseFloat(p.variants[0].price) : 0,
+          featured: false, // Shopify doesn't have this by default
+          images: p.images && p.images.length > 0 ? p.images.map((img: any) => img.src) : ['/assets/placeholder.jpg'],
+          description: p.body_html || '',
+          details: '', // Not available from Shopify by default
+          care: '', // Not available from Shopify by default
+          footnote: '', // Not available from Shopify by default
+          availableVases: [], // Not available from Shopify by default
+          category: p.product_type || 'all',
+          tags: p.tags ? p.tags.split(',').map((t: string) => t.trim()) : [],
+          suggestedProducts: [], // Not available from Shopify by default
+          stock: p.variants && p.variants[0] ? p.variants[0].inventory_quantity || 0 : 0,
+          preorderAvailable: false, // Not available from Shopify by default
+        }));
+        setProducts(mappedProducts);
         setLoading(false);
       })
       .catch(() => {
-        setError('Failed to fetch inventory');
+        setError('Failed to fetch products');
         setLoading(false);
       });
   }, []);
@@ -148,59 +158,35 @@ export default function Shop() {
 
       {/* Footer */}
       <footer className="bg-[#F8F5F2] py-12 px-6 md:px-10 border-t border-[#dcd4c3]">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-xl font-medium mb-4">leia</h3>
-              <p className="text-sm text-[#5f493b] leading-relaxed">
-                Eternal flowers crafted with intention for the poetic soul.
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="font-medium mb-3 uppercase text-sm tracking-wide">Information</h4>
-              <ul className="space-y-2 text-sm text-[#5f493b]">
-                <li><Link href="/story" className="hover:underline">Our Story</Link></li>
-                <li><Link href="/impact" className="hover:underline">Impact</Link></li>
-                <li><Link href="/care" className="hover:underline">Flower Care</Link></li>
-                <li><Link href="/business" className="hover:underline">For Businesses</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-medium mb-3 uppercase text-sm tracking-wide">Help</h4>
-              <ul className="space-y-2 text-sm text-[#5f493b]">
-                <li><Link href="/shipping" className="hover:underline">Shipping & Returns</Link></li>
-                <li><Link href="/faq" className="hover:underline">FAQs</Link></li>
-                <li><Link href="/contact" className="hover:underline">Contact Us</Link></li>
-                <li><Link href="/privacy" className="hover:underline">Privacy Policy</Link></li>
-              </ul>
-            </div>
-            
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
               <h4 className="font-medium mb-3 uppercase text-sm tracking-wide cursor-pointer" onClick={() => window.location.href = '/contact'}>Stay Connected</h4>
-              <div className="space-y-3">
-                <div className="flex gap-4 text-sm">
-                  <Link href="#" className="text-[#5f493b] hover:underline">Instagram</Link>
-                  <Link href="#" className="text-[#5f493b] hover:underline">Pinterest</Link>
-                  <Link href="#" className="text-[#5f493b] hover:underline">TikTok</Link>
-                </div>
-                <div>
-                  <input 
-                    type="email" 
-                    placeholder="Email for updates"
-                    className="w-full px-3 py-2 text-sm border border-[#dcd4c3] bg-white text-[#2f1c11] focus:outline-none focus:border-[#5F493B]"
-                  />
-                  <button className="w-full mt-2 bg-[#e7e2d5] text-[#2f1c11] py-2 text-xs uppercase tracking-wide hover:bg-[#dcd4c3] transition-colors duration-200">
-                    Subscribe
-                  </button>
-                </div>
+              <div className="space-y-2 text-sm text-[#5f493b]">
+                <div><Link href="#" className="hover:underline">Instagram</Link></div>
+                <div><Link href="#" className="hover:underline">Pinterest</Link></div>
+                <div><Link href="#" className="hover:underline">Newsletter</Link></div>
+              </div>
+            </div>
+            <div>
+              <h4 className="font-medium mb-3 uppercase text-sm tracking-wide">Support</h4>
+              <div className="space-y-2 text-sm text-[#5f493b]">
+                <div><Link href="/care" className="hover:underline">Flower Care</Link></div>
+                <div><Link href="/contact" className="hover:underline">Contact Us</Link></div>
+                <div><Link href="/faq" className="hover:underline">FAQ</Link></div>
+              </div>
+            </div>
+            <div>
+              <h4 className="font-medium mb-3 uppercase text-sm tracking-wide">Company</h4>
+              <div className="space-y-2 text-sm text-[#5f493b]">
+                <div><Link href="/our-story" className="hover:underline">Our Story</Link></div>
+                <div><Link href="/sustainability" className="hover:underline">Sustainability</Link></div>
+                <div><Link href="/privacy" className="hover:underline">Privacy</Link></div>
               </div>
             </div>
           </div>
-          
-          <div className="border-t border-[#dcd4c3] mt-8 pt-6 text-center text-sm text-[#5f493b]">
-            &copy; {new Date().getFullYear()} Éternelle. Crafted with intention.
+          <div className="border-t border-[#dcd4c3] pt-6 text-sm text-[#5f493b]">
+            &copy; {new Date().getFullYear()} LEIA. Crafted with intention.
           </div>
         </div>
       </footer>

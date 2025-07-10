@@ -36,13 +36,14 @@ interface Vase {
 }
 
 interface ProductDetailProps {
-  params: Promise<{
+  params: {
     id: string;
-  }>;
+  };
 }
 
 export default function ProductDetail({ params }: ProductDetailProps) {
-  const { id } = use(params);
+  // @ts-expect-error Next.js App Router params Promise workaround
+  const { id } = use(params) as { id: string };
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [selectedVase, setSelectedVase] = useState<Vase | null>(null);
@@ -58,28 +59,42 @@ export default function ProductDetail({ params }: ProductDetailProps) {
   const isAdmin = false; // Set to false for production so admin controls are hidden
 
   useEffect(() => {
-    const foundProduct = getProductById(id);
-    if (foundProduct) {
-      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/inventory/${id}`)
-        .then(res => res.json())
-        .then(inv => {
-          setProduct({ ...foundProduct, stock: inv.stock, preorderAvailable: !!inv.preorderAvailable });
-          setSelectedVase(foundProduct.availableVases[0] || null);
-          setSuggestedProducts(getSuggestedProducts(id).filter((p): p is Product => p !== undefined).map(p => ({ ...p, stock: 0, preorderAvailable: false })));
-          setAllProducts(products.filter(p => p.id !== id).map(p => ({ ...p, stock: 0, preorderAvailable: false })));
-          setLoading(false);
-        })
-        .catch(() => {
-          setProduct({ ...foundProduct, stock: 0, preorderAvailable: false });
-          setSelectedVase(foundProduct.availableVases[0] || null);
-          setSuggestedProducts(getSuggestedProducts(id).filter((p): p is Product => p !== undefined).map(p => ({ ...p, stock: 0, preorderAvailable: false })));
-          setAllProducts(products.filter(p => p.id !== id).map(p => ({ ...p, stock: 0, preorderAvailable: false })));
-          setLoading(false);
-        });
-    } else {
-      setError('Product not found.');
-      setLoading(false);
-    }
+    setLoading(true);
+    setError(null);
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/shopify/products/${id}`)
+      .then(res => {
+        if (!res.ok) throw new Error('Product not found');
+        return res.json();
+      })
+      .then((shopifyProduct: any) => {
+        // Map Shopify product data to local Product interface
+        const mappedProduct: Product = {
+          id: shopifyProduct.id.toString(),
+          name: shopifyProduct.title,
+          price: shopifyProduct.variants && shopifyProduct.variants[0] ? parseFloat(shopifyProduct.variants[0].price) : 0,
+          featured: false,
+          images: shopifyProduct.images && shopifyProduct.images.length > 0 ? shopifyProduct.images.map((img: any) => img.src) : ['/assets/placeholder.jpg'],
+          description: shopifyProduct.body_html || '',
+          details: '',
+          care: shopifyProduct.care || '',
+          footnote: '',
+          availableVases: [],
+          category: shopifyProduct.product_type || 'all',
+          tags: shopifyProduct.tags ? shopifyProduct.tags.split(',').map((t: string) => t.trim()) : [],
+          suggestedProducts: [],
+          stock: shopifyProduct.variants && shopifyProduct.variants[0] ? shopifyProduct.variants[0].inventory_quantity || 0 : 0,
+          preorderAvailable: false,
+        };
+        setProduct(mappedProduct);
+        setSelectedVase(null);
+        setSuggestedProducts([]);
+        setAllProducts([]);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError('Product not found.');
+        setLoading(false);
+      });
   }, [id]);
 
   const handleOrder = () => {
@@ -114,17 +129,18 @@ export default function ProductDetail({ params }: ProductDetailProps) {
     setExpandedSection(expandedSection === section ? null : section);
   };
 
-  const getCurrentProductImage = () => {
-    if (!product) return '/assets/placeholder.jpg';
-    // If a vase is selected and has a product image, use that
-    if (selectedVase && selectedVase.productImage) {
-      return selectedVase.productImage || '/assets/placeholder.jpg';
+  // Helper to get all media (images and videos)
+  const getAllMedia = () => {
+    if ((product as any)?.media && Array.isArray((product as any).media) && (product as any).media.length > 0) {
+      return (product as any).media;
     }
-    // Otherwise use the selected image from the product gallery
-    return product.images && product.images[selectedImageIndex]
-      ? product.images[selectedImageIndex]
-      : '/assets/placeholder.jpg';
+    // Fallback to images array for backward compatibility
+    return product?.images?.map((src) => ({ media_type: 'image', src })) || [];
   };
+  const allMedia = getAllMedia();
+
+  // Helper to get the current media item
+  const getCurrentMedia = () => allMedia[selectedImageIndex] || null;
 
   if (loading) {
     return (
@@ -168,21 +184,41 @@ export default function ProductDetail({ params }: ProductDetailProps) {
           
           {/* Image Gallery Section */}
           <div className="space-y-4">
-            {/* Main Image */}
+            {/* Main Image/Video */}
             <div className="aspect-[4/5] relative overflow-hidden">
-              <Image
-                src={getCurrentProductImage()}
-                alt={product.name}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-                priority
-              />
+              {(() => {
+                const media = getCurrentMedia();
+                if (!media) return null;
+                if (media.media_type === 'image') {
+                  return (
+                    <Image
+                      src={media.src || media.preview_image?.src || '/assets/placeholder.jpg'}
+                      alt={product.name}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover"
+                      priority
+                    />
+                  );
+                } else if (media.media_type === 'video' && media.sources && media.sources[0]) {
+                  return (
+                    <video
+                      controls
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      poster={media.preview_image?.src || ''}
+                    >
+                      <source src={media.sources[0].url} type={media.sources[0].mime_type} />
+                      Your browser does not support the video tag.
+                    </video>
+                  );
+                }
+                return null;
+              })()}
             </div>
 
             {/* Thumbnail Navigation */}
             <div className="flex gap-2 overflow-x-auto pb-2">
-              {product.images.map((image, index) => (
+              {allMedia.map((media: any, index: number) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImageIndex(index)}
@@ -190,13 +226,23 @@ export default function ProductDetail({ params }: ProductDetailProps) {
                     selectedImageIndex === index ? 'border-[#5F493B]' : 'border-transparent hover:border-[#dcd4c3]'
                   }`}
                 >
-                  <Image
-                    src={image || '/assets/placeholder.jpg'}
-                    alt={`${product.name} view ${index + 1}`}
-                    fill
-                    sizes="80px"
-                    className="object-cover"
-                  />
+                  {media.media_type === 'image' ? (
+                    <Image
+                      src={media.src || media.preview_image?.src || '/assets/placeholder.jpg'}
+                      alt={`${product.name} view ${index + 1}`}
+                      fill
+                      sizes="80px"
+                      className="object-cover"
+                    />
+                  ) : media.media_type === 'video' && media.preview_image ? (
+                    <Image
+                      src={media.preview_image.src}
+                      alt={`${product.name} video preview ${index + 1}`}
+                      fill
+                      sizes="80px"
+                      className="object-cover"
+                    />
+                  ) : null}
                 </button>
               ))}
             </div>
@@ -257,25 +303,7 @@ export default function ProductDetail({ params }: ProductDetailProps) {
                   <span className="text-xl">{expandedSection === 'description' ? '−' : '+'}</span>
                 </button>
                 {expandedSection === 'description' && (
-                  <div className="pb-4 text-[#5f493b] leading-relaxed">
-                    {product.description}
-                  </div>
-                )}
-              </div>
-
-              {/* Product Details */}
-              <div className="border-b border-[#dcd4c3]">
-                <button
-                  onClick={() => toggleSection('details')}
-                  className="flex justify-between items-center w-full py-3 text-left"
-                >
-                  <span className="font-medium">Product Details</span>
-                  <span className="text-xl">{expandedSection === 'details' ? '−' : '+'}</span>
-                </button>
-                {expandedSection === 'details' && (
-                  <div className="pb-4 text-[#5f493b] leading-relaxed">
-                    {product.details}
-                  </div>
+                  <div className="pb-4 text-[#5f493b] leading-relaxed" dangerouslySetInnerHTML={{ __html: product.description }} />
                 )}
               </div>
 
@@ -289,9 +317,8 @@ export default function ProductDetail({ params }: ProductDetailProps) {
                   <span className="text-xl">{expandedSection === 'care' ? '−' : '+'}</span>
                 </button>
                 {expandedSection === 'care' && (
-                  <div className="pb-4 text-[#5f493b] leading-relaxed">
-                    {product.care}
-                  </div>
+                  <div className="pb-4 text-[#5f493b] leading-relaxed" 
+                    dangerouslySetInnerHTML={{ __html: product.care.replace(/\n/g, '<br />') }} />
                 )}
               </div>
             </div>
